@@ -1,0 +1,226 @@
+value,n,feature
+1,3144,Marital status
+2,296,Marital status
+4,73,Marital status
+5,19,Marital status
+6,4,Marital status
+3,3,Marital status
+1,1364,Application mode
+17,701,Application mode
+39,621,Application mode
+43,249,Application mode
+44,176,Application mode
+7,109,Application mode
+18,98,Application mode
+42,59,Application mode
+51,45,Application mode
+16,31,Application mode
+53,31,Application mode
+15,24,Application mode
+5,15,Application mode
+10,10,Application mode
+2,3,Application mode
+57,1,Application mode
+27,1,Application mode
+26,1,Application mode
+9500,607,Course
+9147,302,Course
+9238,291,Course
+9085,277,Course
+9773,267,Course
+9991,217,Course
+9670,213,Course
+9254,198,Course
+171,175,Course
+9070,174,Course
+9003,171,Course
+8014,165,Course
+9853,158,Course
+9119,133,Course
+9130,115,Course
+9556,66,Course
+33,10,Course
+1,3157,Daytime/evening attendance
+0,382,Daytime/evening attendance
+1,2962,Previous qualification
+39,185,Previous qualification
+19,127,Previous qualification
+3,101,Previous qualification
+12,34,Previous qualification
+42,32,Previous qualification
+40,30,Previous qualification
+2,21,Previous qualification
+6,13,Previous qualification
+9,9,Previous qualification
+38,7,Previous qualification
+43,6,Previous qualification
+4,5,Previous qualification
+10,4,Previous qualification
+5,1,Previous qualification
+14,1,Previous qualification
+15,1,Previous qualification
+1,3453,Nacionality
+41,26,Nacionality
+6,13,Nacionality
+26,12,Nacionality
+22,10,Nacionality
+100,3,Nacionality
+24,3,Nacionality
+11,3,Nacionality
+105,2,Nacionality
+101,2,Nacionality
+103,2,Nacionality
+62,2,Nacionality
+21,2,Nacionality
+32,1,Nacionality
+14,1,Nacionality
+25,1,Nacionality
+13,1,Nacionality
+108,1,Nacionality
+2,1,Nacionality
+1,863,Mother's qualification
+37,793,Mother's qualification
+19,777,Mother's qualification
+38,444,Mother's qualification
+3,344,Mother's qualification
+34,108,Mother's qualification
+2,67,Mother's qualification
+4,38,Mother's qualification
+12,34,Mother's qualification
+5,19,Mother's qualification
+40,8,Mother's qualification
+9,6,Mother's qualification
+39,6,Mother's qualification
+41,5,Mother's qualification
+6,3,Mother's qualification
+36,3,Mother's qualification
+42,3,Mother's qualification
+43,3,Mother's qualification
+10,3,Mother's qualification
+29,3,Mother's qualification
+30,2,Mother's qualification
+22,1,Mother's qualification
+11,1,Mother's qualification
+14,1,Mother's qualification
+35,1,Mother's qualification
+26,1,Mother's qualification
+18,1,Mother's qualification
+44,1,Mother's qualification
+37,959,Father's qualification
+19,779,Father's qualification
+1,717,Father's qualification
+38,563,Father's qualification
+3,228,Father's qualification
+34,93,Father's qualification
+2,53,Father's qualification
+4,32,Father's qualification
+12,31,Father's qualification
+39,16,Father's qualification
+5,14,Father's qualification
+11,9,Father's qualification
+36,7,Father's qualification
+40,5,Father's qualification
+30,4,Father's qualification
+9,4,Father's qualification
+29,3,Father's qualification
+14,3,Father's qualification
+10,2,Father's qualification
+6,2,Father's qualification
+22,2,Father's qualification
+41,2,Father's qualification
+43,2,Father's qualification
+25,1,Father's qualification
+31,1,Father's qualification
+18,1,Father's qualification
+42,1,Father's qualification
+26,1,Father's qualification
+35,1,Father's qualification
+44,1,Father's qualification
+27,1,Father's qualification
+20,1,Father's qualification
+9,1261,Mother's occupation
+4,661,Mother's occupation
+5,429,Mother's occupation
+3,269,Mother's occupation
+2,252,Mother's occupation
+7,221,Mother's occupation
+0,115,Mother's occupation
+1,83,Mother's occupation
+6,77,Mother's occupation
+90,54,Mother's occupation
+8,27,Mother's occupation
+191,22,Mother's occupation
+99,14,Mother's occupation
+194,9,Mother's occupation
+141,7,Mother's occupation
+144,5,Mother's occupation
+123,4,Mother's occupation
+192,4,Mother's occupation
+10,3,Mother's occupation
+143,3,Mother's occupation
+151,3,Mother's occupation
+134,3,Mother's occupation
+175,2,Mother's occupation
+153,2,Mother's occupation
+122,2,Mother's occupation
+193,2,Mother's occupation
+152,1,Mother's occupation
+131,1,Mother's occupation
+173,1,Mother's occupation
+171,1,Mother's occupation
+132,1,Mother's occupation
+9,819,Father's occupation
+7,501,Father's occupation
+5,410,Father's occupation
+4,310,Father's occupation
+3,304,Father's occupation
+8,260,Father's occupation
+10,210,Father's occupation
+6,198,Father's occupation
+2,167,Father's occupation
+1,113,Father's occupation
+0,107,Father's occupation
+90,53,Father's occupation
+99,16,Father's occupation
+193,11,Father's occupation
+171,7,Father's occupation
+192,6,Father's occupation
+163,5,Father's occupation
+144,5,Father's occupation
+135,3,Father's occupation
+175,3,Father's occupation
+122,2,Father's occupation
+103,2,Father's occupation
+172,2,Father's occupation
+182,2,Father's occupation
+152,2,Father's occupation
+183,2,Father's occupation
+123,2,Father's occupation
+151,2,Father's occupation
+181,2,Father's occupation
+194,2,Father's occupation
+141,1,Father's occupation
+134,1,Father's occupation
+154,1,Father's occupation
+131,1,Father's occupation
+161,1,Father's occupation
+102,1,Father's occupation
+153,1,Father's occupation
+143,1,Father's occupation
+112,1,Father's occupation
+195,1,Father's occupation
+101,1,Father's occupation
+1,1942,Displaced
+0,1597,Displaced
+0,3498,Educational special needs
+1,41,Educational special needs
+0,3150,Debtor
+1,389,Debtor
+1,3120,Tuition fees up to date
+0,419,Tuition fees up to date
+0,2298,Gender
+1,1241,Gender
+0,2645,Scholarship holder
+1,894,Scholarship holder
+0,3453,International
+1,86,International

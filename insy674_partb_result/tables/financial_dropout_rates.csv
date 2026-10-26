@@ -1,0 +1,7 @@
+feature,value,n,dropout_n,dropout_pct,wilson_low_pct,wilson_high_pct
+Scholarship holder,0,2645,1022,38.64,36.8,40.51
+Scholarship holder,1,894,115,12.86,10.83,15.22
+Debtor,0,3150,888,28.19,26.65,29.79
+Debtor,1,389,249,64.01,59.12,68.62
+Tuition fees up to date,0,419,364,86.87,83.3,89.77
+Tuition fees up to date,1,3120,773,24.78,23.29,26.32

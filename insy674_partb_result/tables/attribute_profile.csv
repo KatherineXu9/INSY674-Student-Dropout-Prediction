@@ -1,0 +1,37 @@
+feature,group,semantic_type,timing,missing_pct,unique,distribution,usefulness_and_preparation
+Marital status,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,6,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Application mode,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,18,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Application order,Context,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,8,min=0; median=1; max=9; skew=1.88,Inspect skew and extremes; retain valid observations.
+Course,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,17,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Daytime/evening attendance,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Previous qualification,Academic,Categorical code,Enrollment candidate; verify administrative timing,0.0,17,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Previous qualification (grade),Academic,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,99,min=95; median=133; max=190; skew=0.33,Inspect skew and extremes; retain valid observations.
+Nacionality,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,19,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Mother's qualification,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,28,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous. Unknown code 34: 108 (3.1%).
+Father's qualification,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,32,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous. Unknown code 34: 93 (2.6%).
+Mother's occupation,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,31,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Father's occupation,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,41,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Admission grade,Academic,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,591,min=95; median=126; max=190; skew=0.55,Inspect skew and extremes; retain valid observations.
+Displaced,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Educational special needs,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Debtor,Financial,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous. Recording date unconfirmed; early-availability assumption must be documented.
+Tuition fees up to date,Financial,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous. Recording date unconfirmed; early-availability assumption must be documented.
+Gender,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Scholarship holder,Financial,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous. Recording date unconfirmed; early-availability assumption must be documented.
+Age at enrollment,Context,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,46,min=17; median=20; max=70; skew=2.05,Inspect skew and extremes; retain valid observations.
+International,Context,Categorical code,Enrollment candidate; verify administrative timing,0.0,2,Category frequencies in categorical_counts.csv,Do not interpret numeric codes as continuous.
+Curricular units 1st sem (credited),Academic,Count,End of first semester,0.0,21,min=0; median=0; max=20; skew=4.20,Inspect skew and extremes; retain valid observations.
+Curricular units 1st sem (enrolled),Academic,Count,End of first semester,0.0,23,min=0; median=6; max=26; skew=1.65,Inspect skew and extremes; retain valid observations.
+Curricular units 1st sem (evaluations),Academic,Count,End of first semester,0.0,35,min=0; median=8; max=45; skew=0.90,Inspect skew and extremes; retain valid observations.
+Curricular units 1st sem (approved),Academic,Count,End of first semester,0.0,23,min=0; median=5; max=26; skew=0.78,Inspect skew and extremes; retain valid observations.
+Curricular units 1st sem (grade),Academic,Count,End of first semester,0.0,683,min=0; median=12.3; max=18.9; skew=-1.55,Inspect skew and extremes; retain valid observations. Zero grade may indicate no successful assessment; do not replace with missing automatically.
+Curricular units 1st sem (without evaluations),Academic,Count,End of first semester,0.0,11,min=0; median=0; max=12; skew=7.60,Inspect skew and extremes; retain valid observations.
+Curricular units 2nd sem (credited),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Curricular units 2nd sem (enrolled),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Curricular units 2nd sem (evaluations),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Curricular units 2nd sem (approved),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Curricular units 2nd sem (grade),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Curricular units 2nd sem (without evaluations),Context,Count,Excluded: after prediction horizon,not analyzed,not analyzed,Excluded,Excluded from both scenarios.
+Unemployment rate,Context,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,10,min=7.6; median=11.1; max=16.2; skew=0.21,Inspect skew and extremes; retain valid observations.
+Inflation rate,Context,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,9,min=-0.8; median=1.4; max=3.7; skew=0.27,Inspect skew and extremes; retain valid observations.
+GDP,Context,Numeric/ordinal,Enrollment candidate; verify administrative timing,0.0,10,min=-4.06; median=0.32; max=3.51; skew=-0.39,Inspect skew and extremes; retain valid observations.

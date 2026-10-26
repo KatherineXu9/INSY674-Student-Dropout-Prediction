@@ -1,0 +1,20 @@
+{
+  "source": "https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success",
+  "data_sha256": "3ef126de5cefff26eb11fbb4237f1a1401cb64b488e2f1d598c23cedeb4c45ae",
+  "total_rows": 4424,
+  "train_n": 3539,
+  "test_n": 885,
+  "seed": 42,
+  "test_size": 0.2,
+  "row_id": "zero-based original data row, excluding header",
+  "full_file_duplicate_rows": 0,
+  "training_missing_cells": 0,
+  "second_semester_excluded": [
+    "Curricular units 2nd sem (credited)",
+    "Curricular units 2nd sem (enrolled)",
+    "Curricular units 2nd sem (evaluations)",
+    "Curricular units 2nd sem (approved)",
+    "Curricular units 2nd sem (grade)",
+    "Curricular units 2nd sem (without evaluations)"
+  ]
+}
