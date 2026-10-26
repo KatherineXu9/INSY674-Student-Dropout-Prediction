@@ -133,13 +133,6 @@ This observational dataset supports descriptive and predictive research rather t
 
 The training data show outcome imbalance and distinct academic and financial patterns worth testing. First-semester progress appears informative descriptively, while financial indicators also show large group differences. Whether either feature group provides stronger or additional predictive value must be evaluated by the modeling team. The main EDA contributions are documented data quality, complete feature profiling, interpretable visual findings and concrete preparation recommendations.
 
-## Reference and reproducibility
-
-Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. [doi:10.24432/C5MC89](https://doi.org/10.24432/C5MC89). Data license: CC BY 4.0.
-
-Variable definitions and label horizon: [UCI dataset documentation](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success).
-
-Run the accompanying script with the original CSV: `python Person_B_EDA_Script.py --data /path/to/data.csv`. Install dependencies with `python -m pip install pandas numpy matplotlib seaborn scikit-learn`. Python 3.13 was used for verification. The script regenerates figures, detailed tables, split assignments and an analytical Markdown report in `person_b_eda_results/`. This Markdown report references images in the accompanying `eda_figures/` folder. Upload both the report and that folder to GitHub, preserving their relative paths.
 
 ## Appendix A. Complete feature profile
 
