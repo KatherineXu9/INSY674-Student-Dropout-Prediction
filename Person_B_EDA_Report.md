@@ -1,4 +1,4 @@
-INSY 674 · PERSON B
+Part B -Sophie
 
 # Exploratory Data Analysis
 
