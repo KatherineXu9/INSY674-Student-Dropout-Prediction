@@ -2,9 +2,6 @@ INSY 674 · PERSON B
 
 # Exploratory Data Analysis
 
-Predicting Students’ Dropout and Academic Success
-
-Academic patterns, financial indicators and implications for data preparation
 
 ## 1. Purpose and analysis scope
 
