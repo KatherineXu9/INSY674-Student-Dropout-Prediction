@@ -77,3 +77,52 @@ The project will assess whether the model improves on baseline predictions, whet
 ## Data Source
 
 Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5MC89
+
+
+
+## Data Preprocessing and Feature Engineering （Part C）
+
+### Data Cleaning
+
+The dataset contains 4,424 observations, 36 input features, and one target variable. Initial data quality checks identified no missing values or fully duplicated records. Therefore, no observations were removed. Column names were standardized to remove hidden characters and unnecessary whitespace.
+
+Zero values in academic variables were retained because they may represent meaningful academic outcomes rather than missing data.
+
+### Feature Selection and Data Leakage Prevention
+
+Four feature sets were created to support different prediction scenarios:
+
+- **Admission Only:** 18 features, excluding first- and second-semester results, selected financial indicators, and macroeconomic variables.
+- **First Semester:** 24 features, combining the admission feature set with six first-semester academic variables.
+- **Admission + Financial:** 21 features, adding three financial indicators to the admission feature set.
+- **First Semester + Financial:** 27 features, combining admission information, first-semester academic variables, and three financial indicators.
+
+All six second-semester features were excluded because they would not be available at the intended early prediction points.
+
+The financial scenarios include scholarship status, debtor status, and tuition payment status. Their recording times have not been independently verified, so these scenarios are treated as conditional analyses rather than confirmed leakage-free early prediction settings.
+
+### Feature Engineering
+
+Three additional features were created for the first-semester scenarios:
+
+1. **First Semester Pass Rate:** Approved curricular units divided by enrolled curricular units.
+2. **Evaluations per Enrolled Course:** Number of evaluations divided by enrolled curricular units.
+3. **No First-Semester Enrollment:** A binary indicator identifying students with zero enrolled curricular units.
+
+When enrolled units equal zero, the two ratios are treated as undefined (`NaN`) and handled through median imputation within the preprocessing pipeline. The zero-enrollment indicator preserves information about these students.
+
+### Encoding and Scaling
+
+Categorical features, including numerically coded categories, were processed using OneHotEncoder with `handle_unknown="ignore"`.
+
+Numerical features were processed using median imputation and StandardScaler. Categorical features were assigned most-frequent imputation when needed.
+
+These transformations were combined using Scikit-learn Pipeline and ColumnTransformer to provide a consistent and reusable preprocessing workflow.
+
+### Train/Test Split and Pipeline Validation
+
+The dataset was divided into 80% training data (3,539 observations) and 20% held-out test data (885 observations) using stratified sampling with `random_state=42`.
+
+The preprocessing pipelines were tested using training data only. A Logistic Regression smoke test confirmed that the first-semester pipeline could be successfully fitted with a classifier. Integration checks also verified that all four feature sets could be transformed successfully.
+
+The pipelines are designed to be integrated with downstream classification models so that preprocessing parameters can be fitted separately within each cross-validation training fold, reducing the risk of data leakage.
