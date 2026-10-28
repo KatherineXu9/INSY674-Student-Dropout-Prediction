@@ -126,3 +126,131 @@ The dataset was divided into 80% training data (3,539 observations) and 20% held
 The preprocessing pipelines were tested using training data only. A Logistic Regression smoke test confirmed that the first-semester pipeline could be successfully fitted with a classifier. Integration checks also verified that all four feature sets could be transformed successfully.
 
 The pipelines are designed to be integrated with downstream classification models so that preprocessing parameters can be fitted separately within each cross-validation training fold, reducing the risk of data leakage.
+
+# Evaluation and Interpretation
+
+## Evaluation Objective
+
+This proof-of-value study examines whether machine learning can help academic advisors identify students who may need additional support. The evaluation considers classification performance across **Dropout**, **Enrolled**, and **Graduate** outcomes and the practical consequences of incorrect predictions.
+
+**Macro F1** is the primary comparison metric because it gives equal weight to all three classes. **Dropout recall** measures the proportion of actual dropout cases identified, while **dropout precision** measures the reliability of dropout alerts. Accuracy and the confusion matrix provide additional context.
+
+The results presented here come from five-fold stratified cross-validation and out-of-fold predictions on the training data. They provide evidence of predictive potential and support model selection.
+
+## Model Performance and Selection
+
+A soft-voting ensemble combining tuned Logistic Regression, Gradient Boosting, and XGBoost classifiers was selected based on its mean cross-validation macro F1.
+
+The selected scenario uses admission characteristics and first-semester academic information. Second-semester variables are excluded, and financial indicators are excluded from the main scenario because their recording dates have not been verified.
+
+| Candidate | CV Macro F1 (Mean ± SD) | CV Dropout Recall (Mean ± SD) | CV Accuracy (Mean) |
+|---|---:|---:|---:|
+| **Soft-voting ensemble** | **0.6516 ± 0.0113** | **0.6939 ± 0.0248** | **0.7304** |
+| Logistic Regression | 0.6476 ± 0.0158 | 0.6429 ± 0.0221 | 0.6948 |
+| Gradient Boosting | 0.6344 ± 0.0135 | 0.7053 ± 0.0182 | 0.7259 |
+| XGBoost | 0.6342 ± 0.0184 | 0.7080 ± 0.0187 | 0.7268 |
+
+The ensemble achieved the highest mean macro F1 and accuracy among the tuned candidates. Its mean dropout recall of **69.39%** indicates that it identified approximately 69 out of every 100 actual dropout cases across validation folds. Approximately 31% were missed on average.
+
+However, its macro F1 exceeded tuned Logistic Regression by only **0.0040**. This small difference does not establish a statistically reliable improvement. Logistic Regression therefore remains a credible alternative when simplicity and ease of interpretation are important.
+
+XGBoost achieved the highest dropout recall, at **70.80%**, but a lower macro F1. The ensemble's selection reflects the project's emphasis on balanced performance across all three classes. A different choice could be appropriate if detecting dropout cases were given greater priority, depending on dropout precision and advising capacity.
+
+## Confusion Matrix and Error Analysis
+
+Out-of-fold predictions from the **untuned first-semester XGBoost model** provide preliminary evidence about classification errors. Each prediction was generated while the corresponding student was excluded from that fold's training data.
+
+The following matrix describes this comparison model across **3,539 training records**. It does not represent the selected ensemble's performance.
+
+| Actual / Predicted | Dropout | Enrolled | Graduate | Total |
+|---|---:|---:|---:|---:|
+| Dropout | 789 | 132 | 216 | 1,137 |
+| Enrolled | 176 | 199 | 260 | 635 |
+| Graduate | 108 | 117 | 1,542 | 1,767 |
+| **Total** | **1,073** | **448** | **2,018** | **3,539** |
+
+
+| Class | Precision | Recall | F1 |
+|---|---:|---:|---:|
+| Dropout | 0.7353 | 0.6939 | 0.7140 |
+| Enrolled | 0.4442 | 0.3134 | 0.3675 |
+| Graduate | 0.7641 | 0.8727 | 0.8148 |
+
+### What Worked
+
+Graduate was the strongest class, with recall of **87.27%** and F1 of **0.8148**. The model also correctly identified **789 of 1,137 dropout cases**, showing that first-semester information contains useful signals for identifying academic risk.
+
+### What Remained Difficult
+
+Enrolled was the weakest class, with recall of **31.34%** and F1 of **0.3675**. The most frequent individual error was predicting Graduate for an Enrolled student, occurring in **260 cases**.
+
+Enrolled represents students who were still studying at the observation point. Their eventual graduation or dropout outcomes are unknown. This complicates interpretation because the model predicts the recorded status rather than an eventual outcome. The available results do not establish the specific causes of these errors.
+
+### Missed Dropout Cases
+
+The model missed **348 actual dropout cases**: 216 were predicted as Graduate and 132 as Enrolled. If outreach depended heavily on model predictions, these students could receive lower priority despite subsequently dropping out.
+
+A prediction of Graduate should therefore not prevent a student from receiving assistance or override other evidence available to advisors.
+
+### False Dropout Alerts
+
+The model incorrectly classified **284 students as Dropout**, including 176 Enrolled students and 108 Graduates. Approximately **26.47%** of its dropout alerts did not match the observed Dropout label.
+
+False alerts could increase advising workload and create unnecessary concern. However, an incorrect dropout prediction does not establish that support would be unhelpful. The practical value of outreach must be assessed through student and advisor outcomes as well as classification metrics.
+
+### Additional Information for Understanding Errors
+
+Attendance, recent engagement changes, employment demands, caregiving responsibilities, and students' own explanations could provide context that academic and administrative records do not capture.
+
+These are proposed avenues for investigation rather than verified causes of the observed errors. Their usefulness would require further validation.
+
+## Interpretation of the Main Findings
+
+### First-Semester Information Improves Prediction
+
+Under a fixed Logistic Regression comparison, adding first-semester academic information increased macro F1 from **0.4924 to 0.6206** and dropout recall from **52.94% to 69.66%**.
+
+The improvements of **0.1282 in macro F1** and **16.72 percentage points in dropout recall** indicate that observed academic progress provides substantial predictive information beyond admission characteristics.
+
+This supports reassessing students after the first semester. However, the additional information becomes available later, and some students may need assistance before first-semester results are recorded.
+
+### More Complex Models Did Not Always Perform Better
+
+Tuned Logistic Regression achieved a higher macro F1 than either tuned boosting model and performed close to the ensemble. Its macro F1 increased from **0.6206 before tuning to 0.6476 afterward**.
+
+This finding shows that careful tuning of a simpler model can be competitive with more complex methods. The ensemble's modest advantage should be considered alongside its additional complexity.
+
+### Financial Information Shows Predictive Potential
+
+Adding financial indicators increased macro F1 from **0.6206 to 0.6669** in the fixed first-semester Logistic Regression comparison.
+
+However, the recording dates of scholarship status, debtor status, and tuition payment status remain unverified. These results demonstrate predictive associations but do not establish that the variables would be available at the intended prediction date. They are therefore excluded from the main selected scenario.
+
+### Important Predictors Describe Associations
+
+Permutation importance for tuned Logistic Regression identified first-semester academic measures, including approved curricular units and grades, among the leading predictors. This is consistent with the improvement observed when first-semester information was added.
+
+These importance results describe Logistic Regression rather than directly explaining the ensemble. They also do not establish causation. The analysis does not demonstrate that changing a predictor would prevent dropout or identify the appropriate intervention for an individual student.
+
+## Assumptions and Limitations
+
+| Limitation or Assumption | Likely Impact | How It Could Be Addressed |
+|---|---|---|
+| Reported results come from training-data cross-validation, and tuning and selection reused folds. | Performance estimates may be optimistic and do not establish independent test performance. | Validate the fixed model on independent data. |
+| Financial recording dates are unverified. | These predictors may not be available at the intended prediction date. | Verify timestamps before including them in the main model. |
+| First-semester academic results are required. | Equivalent predictions cannot be made at admission. | Investigate admission-stage screening followed by a first-semester update. |
+| Enrolled is an intermediate status. | Predictions do not establish these students' eventual outcomes. | Obtain longer follow-up or investigate time-to-event modeling. |
+| Historical patterns may change across cohorts or institutions. | Performance could decline in other settings. | Validate on later cohorts and external institutional data. |
+| Aggregate scores may conceal subgroup differences. | Some groups could experience more missed cases or false alerts. | Assess subgroup precision and recall with sample sizes and uncertainty. |
+| Personal circumstances are not fully represented in the predictors. | The model may miss risks that advisors could recognize through conversation. | Investigate additional information where appropriate and retain human review. |
+| Prediction does not establish intervention effectiveness. | Accurate alerts may not lead to reduced dropout. | Conduct a prospective pilot assessing workload, student experience, and outcomes. |
+
+No operational alert threshold has been established because advising capacity and the consequences of different errors have not been specified. Any future threshold should be chosen using validation data and evaluated independently.
+
+## Conclusion
+
+The study provides promising evidence that first-semester academic information can support student dropout prediction. The selected ensemble achieved a cross-validation macro F1 of **0.6516**, accuracy of **73.04%**, and dropout recall of **69.39%**.
+
+Its advantage over tuned Logistic Regression was modest. Preliminary error analysis also revealed difficulty recognizing Enrolled students and a meaningful number of missed dropout cases. These findings support using predictions to prioritize advisor review and voluntary assistance.
+
+The project demonstrates predictive potential within a proof-of-value study. Further independent validation and an intervention study would be needed to establish whether model-guided outreach improves student outcomes.
