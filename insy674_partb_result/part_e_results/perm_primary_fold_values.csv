@@ -1,0 +1,481 @@
+Feature,Fold,Importance
+Marital status,1,-0.004673440316536492
+Marital status,1,-0.005443751307373179
+Marital status,1,-0.005214716225966032
+Marital status,1,-0.0038965071076987323
+Application mode,1,0.021287588941225732
+Application mode,1,0.01353126800504667
+Application mode,1,0.02504370781900478
+Application mode,1,0.01776419197277257
+Application order,1,0.006881097577117523
+Application order,1,-0.0009589302863073357
+Application order,1,0.0071397207620913505
+Application order,1,0.005282227093580172
+Course,1,0.01874066410317965
+Course,1,0.014180433932279635
+Course,1,0.03559564092267953
+Course,1,0.035296112570684435
+Daytime/evening attendance,1,-0.0012391517416565634
+Daytime/evening attendance,1,0.0022237065826367086
+Daytime/evening attendance,1,0.0061121964671596585
+Daytime/evening attendance,1,0.004158878329129201
+Previous qualification,1,0.0058214957659448174
+Previous qualification,1,0.007473484235612227
+Previous qualification,1,0.006681528588508123
+Previous qualification,1,0.005063069091429617
+Previous qualification (grade),1,-0.008177217740194198
+Previous qualification (grade),1,-0.0043659845090289195
+Previous qualification (grade),1,-0.008608753675730885
+Previous qualification (grade),1,-0.006332504048601639
+Nacionality,1,-0.0021932127959245484
+Nacionality,1,0.0
+Nacionality,1,0.0
+Nacionality,1,0.0
+Mother's qualification,1,0.004956295220130191
+Mother's qualification,1,0.0017876602967228372
+Mother's qualification,1,0.0027120131435237615
+Mother's qualification,1,0.0037737190469776527
+Father's qualification,1,0.011048942340608048
+Father's qualification,1,0.014022936189658775
+Father's qualification,1,0.00852101899462987
+Father's qualification,1,0.01114338353146438
+Mother's occupation,1,-0.0010916431716406771
+Mother's occupation,1,0.003300721810595264
+Mother's occupation,1,0.009503626584585922
+Mother's occupation,1,0.0072780603840266744
+Father's occupation,1,0.0038715139039613433
+Father's occupation,1,-0.001989200202420438
+Father's occupation,1,0.0008411231117456675
+Father's occupation,1,0.007694326405801255
+Admission grade,1,-0.0028942686841531007
+Admission grade,1,0.001199581727142296
+Admission grade,1,0.0025062822244904526
+Admission grade,1,0.003586699920741343
+Displaced,1,0.003212851405622441
+Displaced,1,-0.007243562255397129
+Displaced,1,0.003061923527160615
+Displaced,1,0.00033682633845399934
+Educational special needs,1,0.0
+Educational special needs,1,0.0
+Educational special needs,1,0.0
+Educational special needs,1,0.0
+Gender,1,0.020698028928102574
+Gender,1,0.0011393080992542215
+Gender,1,0.025897694021524864
+Gender,1,0.009974423891020434
+Age at enrollment,1,0.017191133773938883
+Age at enrollment,1,0.015734624727878455
+Age at enrollment,1,0.026235348770054512
+Age at enrollment,1,0.02832584246701575
+International,1,-0.0021932127959245484
+International,1,0.0
+International,1,0.0
+International,1,0.0
+Curricular units 1st sem (credited),1,0.006816081365045301
+Curricular units 1st sem (credited),1,0.01230767922256426
+Curricular units 1st sem (credited),1,0.012089581630176482
+Curricular units 1st sem (credited),1,0.008958587851091604
+Curricular units 1st sem (enrolled),1,0.02462390597870756
+Curricular units 1st sem (enrolled),1,0.036569398847448475
+Curricular units 1st sem (enrolled),1,0.04168909046309599
+Curricular units 1st sem (enrolled),1,0.03640398405033152
+Curricular units 1st sem (evaluations),1,0.04747238311264257
+Curricular units 1st sem (evaluations),1,0.033802097666812414
+Curricular units 1st sem (evaluations),1,0.05253612163273569
+Curricular units 1st sem (evaluations),1,0.041791110766644546
+Curricular units 1st sem (approved),1,0.2611847487929782
+Curricular units 1st sem (approved),1,0.2792399708985205
+Curricular units 1st sem (approved),1,0.2699744134118467
+Curricular units 1st sem (approved),1,0.275138738413274
+Curricular units 1st sem (grade),1,0.06414472341488009
+Curricular units 1st sem (grade),1,0.052083254552704794
+Curricular units 1st sem (grade),1,0.03602153292847854
+Curricular units 1st sem (grade),1,0.03671256736642625
+Curricular units 1st sem (without evaluations),1,0.005450894940338902
+Curricular units 1st sem (without evaluations),1,-0.0016525026870484183
+Curricular units 1st sem (without evaluations),1,0.005397665388694239
+Curricular units 1st sem (without evaluations),1,0.00550300821851446
+Marital status,2,-0.003145086804018593
+Marital status,2,-0.006702350090993625
+Marital status,2,-0.003145086804018593
+Marital status,2,-0.005358369043404254
+Application mode,2,-0.006660958403720496
+Application mode,2,0.005415064460479679
+Application mode,2,0.001973605349216312
+Application mode,2,0.006828546401831281
+Application order,2,-0.0022444740198905855
+Application order,2,-0.00422544762318422
+Application order,2,-0.0011791754758004869
+Application order,2,-0.0004918100780388901
+Course,2,0.01562661096211948
+Course,2,0.03982579288407506
+Course,2,0.01497419138268985
+Course,2,0.02610225154609247
+Daytime/evening attendance,2,0.0008047685070463606
+Daytime/evening attendance,2,0.002369713733963441
+Daytime/evening attendance,2,0.0005444552608631081
+Daytime/evening attendance,2,0.010218122708545274
+Previous qualification,2,0.0003253340403610583
+Previous qualification,2,-0.0018109901333132061
+Previous qualification,2,0.010640559640421099
+Previous qualification,2,0.0056737218761307995
+Previous qualification (grade),2,-0.0001893818135265679
+Previous qualification (grade),2,-1.8609702101324288e-05
+Previous qualification (grade),2,-0.005005801447305891
+Previous qualification (grade),2,0.0005018721965011075
+Nacionality,2,0.0011089830194497274
+Nacionality,2,0.0
+Nacionality,2,0.0
+Nacionality,2,0.0
+Mother's qualification,2,-0.0010749863465187026
+Mother's qualification,2,-0.002493884133335955
+Mother's qualification,2,-0.004851936672641388
+Mother's qualification,2,-0.009545960853165392
+Father's qualification,2,0.0011900079601426805
+Father's qualification,2,0.0075973408870277925
+Father's qualification,2,-0.0032871418219115878
+Father's qualification,2,0.0020333407823912575
+Mother's occupation,2,-0.0023971830087305968
+Mother's occupation,2,0.0013899797384030466
+Mother's occupation,2,-0.0022072548263898373
+Mother's occupation,2,0.010538648794190864
+Father's occupation,2,-0.011503091064769988
+Father's occupation,2,-0.00716062041990273
+Father's occupation,2,0.001051716555207305
+Father's occupation,2,-0.004973787189294976
+Admission grade,2,0.011216717673696253
+Admission grade,2,0.009466447350937823
+Admission grade,2,0.008350668655497828
+Admission grade,2,0.008127220705166582
+Displaced,2,0.0011089830194497274
+Displaced,2,-0.002204762997969123
+Displaced,2,0.004977740253852336
+Displaced,2,0.0037955661532578233
+Educational special needs,2,0.0
+Educational special needs,2,-1.8609702101324288e-05
+Educational special needs,2,0.0022962051127135563
+Educational special needs,2,-0.0014288289774828655
+Gender,2,-0.005005801447305891
+Gender,2,-0.010041153297903227
+Gender,2,-0.004220459588035519
+Gender,2,0.0020103214696270966
+Age at enrollment,2,-0.004467566464086747
+Age at enrollment,2,0.011758584550601858
+Age at enrollment,2,0.005776434934793739
+Age at enrollment,2,0.018943443868584264
+International,2,0.0011089830194497274
+International,2,0.0
+International,2,0.0011089830194497274
+International,2,0.0
+Curricular units 1st sem (credited),2,0.016605030905584517
+Curricular units 1st sem (credited),2,0.010200615907469568
+Curricular units 1st sem (credited),2,0.01618807624148988
+Curricular units 1st sem (credited),2,0.014934203898844034
+Curricular units 1st sem (enrolled),2,0.03613655374819724
+Curricular units 1st sem (enrolled),2,0.02192940502650076
+Curricular units 1st sem (enrolled),2,0.058614627129359054
+Curricular units 1st sem (enrolled),2,0.020550673343514347
+Curricular units 1st sem (evaluations),2,0.012895310906243407
+Curricular units 1st sem (evaluations),2,0.041301946060186445
+Curricular units 1st sem (evaluations),2,0.04461302984505766
+Curricular units 1st sem (evaluations),2,0.015714114299342996
+Curricular units 1st sem (approved),2,0.22421902213675377
+Curricular units 1st sem (approved),2,0.21924330906348538
+Curricular units 1st sem (approved),2,0.21812900644802852
+Curricular units 1st sem (approved),2,0.21717682484861334
+Curricular units 1st sem (grade),2,0.05050100161055715
+Curricular units 1st sem (grade),2,0.053414041438052395
+Curricular units 1st sem (grade),2,0.041955723505697096
+Curricular units 1st sem (grade),2,0.05058505206439634
+Curricular units 1st sem (without evaluations),2,0.0017950226259202395
+Curricular units 1st sem (without evaluations),2,-0.0017119985213466249
+Curricular units 1st sem (without evaluations),2,0.00032171971477445993
+Curricular units 1st sem (without evaluations),2,0.001432683125295764
+Marital status,3,0.0027951019641714314
+Marital status,3,0.00263235596457434
+Marital status,3,-0.00459952631615268
+Marital status,3,0.0028701268224560206
+Application mode,3,0.00710653769170333
+Application mode,3,0.01021427958350929
+Application mode,3,0.013245843676937596
+Application mode,3,-0.0021213421778728536
+Application order,3,-0.008637923353155719
+Application order,3,-0.0023425749123924255
+Application order,3,-0.0028199773753707635
+Application order,3,0.005179369012111468
+Course,3,0.028878774362753656
+Course,3,0.01273258308710723
+Course,3,0.030252787147408533
+Course,3,0.027760170940074103
+Daytime/evening attendance,3,0.007814800062449612
+Daytime/evening attendance,3,0.006891326540734988
+Daytime/evening attendance,3,0.0025770688587000157
+Daytime/evening attendance,3,0.0036301112004910596
+Previous qualification,3,0.009950843871130433
+Previous qualification,3,0.0040793380920842726
+Previous qualification,3,0.009708597989106282
+Previous qualification,3,0.00820493221090235
+Previous qualification (grade),3,-0.007328315190827217
+Previous qualification (grade),3,-0.0014574552342043745
+Previous qualification (grade),3,0.004180091693149368
+Previous qualification (grade),3,0.0003578344345464002
+Nacionality,3,-8.017976005514349e-05
+Nacionality,3,-8.017976005514349e-05
+Nacionality,3,-8.017976005514349e-05
+Nacionality,3,-0.0023068050749710522
+Mother's qualification,3,0.012796246616165075
+Mother's qualification,3,0.015642791739026052
+Mother's qualification,3,0.0014709996063149156
+Mother's qualification,3,0.005541050558463878
+Father's qualification,3,-0.0029871140490331793
+Father's qualification,3,-0.000780351411354463
+Father's qualification,3,-0.013951108759745923
+Father's qualification,3,0.003779629791890393
+Mother's occupation,3,0.0026453728870539095
+Mother's occupation,3,-0.001187374970712085
+Mother's occupation,3,-0.009861433147017928
+Mother's occupation,3,0.00334489732384613
+Father's occupation,3,0.0006669846318078099
+Father's occupation,3,0.009718617301161747
+Father's occupation,3,0.01474304322750819
+Father's occupation,3,0.005569708701828713
+Admission grade,3,-0.0004064682116311502
+Admission grade,3,-0.0015803235154906448
+Admission grade,3,0.008573164736600969
+Admission grade,3,-0.0038425229594969412
+Displaced,3,0.0008206714819380956
+Displaced,3,0.004926606441579384
+Displaced,3,0.003475713259992408
+Displaced,3,-0.004604211847772488
+Educational special needs,3,0.0
+Educational special needs,3,0.0
+Educational special needs,3,0.0
+Educational special needs,3,0.0
+Gender,3,0.005639350551449818
+Gender,3,0.00856833180465244
+Gender,3,0.006859831287791662
+Gender,3,0.009670034614295608
+Age at enrollment,3,0.012617176696043009
+Age at enrollment,3,0.008142029563858788
+Age at enrollment,3,0.01972646766555808
+Age at enrollment,3,0.01627110664580278
+International,3,-0.0011075572384531274
+International,3,-0.0011075572384531274
+International,3,-0.0011075572384531274
+International,3,-0.0011075572384531274
+Curricular units 1st sem (credited),3,0.010313760819050888
+Curricular units 1st sem (credited),3,0.013189565724707308
+Curricular units 1st sem (credited),3,0.030882450301879083
+Curricular units 1st sem (credited),3,0.027144391300670256
+Curricular units 1st sem (enrolled),3,0.025761657290579
+Curricular units 1st sem (enrolled),3,0.033365197844770544
+Curricular units 1st sem (enrolled),3,0.043090559310907106
+Curricular units 1st sem (enrolled),3,0.04661611477910521
+Curricular units 1st sem (evaluations),3,0.009505484546642573
+Curricular units 1st sem (evaluations),3,0.018135623626326702
+Curricular units 1st sem (evaluations),3,0.022502560146880013
+Curricular units 1st sem (evaluations),3,0.03846126819295548
+Curricular units 1st sem (approved),3,0.19884984214806928
+Curricular units 1st sem (approved),3,0.22889871740044254
+Curricular units 1st sem (approved),3,0.2736336054587874
+Curricular units 1st sem (approved),3,0.24232001671998915
+Curricular units 1st sem (grade),3,0.024254268497931664
+Curricular units 1st sem (grade),3,0.014449243020038027
+Curricular units 1st sem (grade),3,0.03507498687036115
+Curricular units 1st sem (grade),3,0.037132597071533824
+Curricular units 1st sem (without evaluations),3,-0.007773167811869541
+Curricular units 1st sem (without evaluations),3,-0.0036365859681748436
+Curricular units 1st sem (without evaluations),3,-0.005743593967163063
+Curricular units 1st sem (without evaluations),3,-0.006788314191037648
+Marital status,4,-0.00013384831577123446
+Marital status,4,0.0015157139166169786
+Marital status,4,-0.0036844402603922743
+Marital status,4,-0.0019094930950048772
+Application mode,4,-0.0034542845374271325
+Application mode,4,-0.0061542680215139756
+Application mode,4,-0.015789250112875908
+Application mode,4,-0.008018646153930775
+Application order,4,0.0010042402061852806
+Application order,4,-0.0017208871501853684
+Application order,4,-0.0016204317870149865
+Application order,4,-0.004204891445522829
+Course,4,0.015926816360603224
+Course,4,0.02013296363972339
+Course,4,0.008954245670930172
+Course,4,0.010581457394788663
+Daytime/evening attendance,4,0.006132500520181439
+Daytime/evening attendance,4,0.0013505307152640311
+Daytime/evening attendance,4,0.005113342083522876
+Daytime/evening attendance,4,0.0011915938100717227
+Previous qualification,4,0.001889787152501765
+Previous qualification,4,0.0071083632872323
+Previous qualification,4,-0.0034446248490451747
+Previous qualification,4,0.006416007789005529
+Previous qualification (grade),4,-0.010095473350743789
+Previous qualification (grade),4,-0.015975137256601712
+Previous qualification (grade),4,-0.005827735299694492
+Previous qualification (grade),4,-0.008040354107142322
+Nacionality,4,0.0
+Nacionality,4,0.0
+Nacionality,4,0.0
+Nacionality,4,0.0
+Mother's qualification,4,-0.012085422543996027
+Mother's qualification,4,0.006328795212943716
+Mother's qualification,4,0.0009294113928089986
+Mother's qualification,4,-0.001366926756473208
+Father's qualification,4,-0.0009696087685922006
+Father's qualification,4,0.002472951377927135
+Father's qualification,4,0.002977059571078855
+Father's qualification,4,-0.0033134811911524897
+Mother's occupation,4,0.006065036495044862
+Mother's occupation,4,-0.008142999538880535
+Mother's occupation,4,-0.0022602867035245167
+Mother's occupation,4,-0.005121298027476517
+Father's occupation,4,0.006623877589067795
+Father's occupation,4,-0.0012723454990278826
+Father's occupation,4,0.006272108366483953
+Father's occupation,4,0.00948960671165544
+Admission grade,4,0.004785864932593031
+Admission grade,4,0.002562157536966758
+Admission grade,4,-0.00038904798814487496
+Admission grade,4,-0.0006373259587620916
+Displaced,4,0.0010296480816035514
+Displaced,4,-0.0010363801777382164
+Displaced,4,0.0031779711413578715
+Displaced,4,-0.004294982875830633
+Educational special needs,4,0.0
+Educational special needs,4,0.001034918624544745
+Educational special needs,4,0.0
+Educational special needs,4,0.001034918624544745
+Gender,4,0.0027664419657126293
+Gender,4,-0.002757148737242532
+Gender,4,-0.0007630684268936649
+Gender,4,-0.001962145848753205
+Age at enrollment,4,0.00025369371024452914
+Age at enrollment,4,0.005431054721028006
+Age at enrollment,4,-0.0006342204400691109
+Age at enrollment,4,-0.004896180034012154
+International,4,-1.3186388550523453e-05
+International,4,0.0010276646537722423
+International,4,-0.0011873035976773805
+International,4,-1.3186388550523453e-05
+Curricular units 1st sem (credited),4,0.03161413277753611
+Curricular units 1st sem (credited),4,0.00674054512515132
+Curricular units 1st sem (credited),4,0.024937699022974047
+Curricular units 1st sem (credited),4,0.020360050749933634
+Curricular units 1st sem (enrolled),4,0.03750986806652645
+Curricular units 1st sem (enrolled),4,0.01724930739129238
+Curricular units 1st sem (enrolled),4,0.017832797555064617
+Curricular units 1st sem (enrolled),4,0.044531470674813445
+Curricular units 1st sem (evaluations),4,0.030627864125965187
+Curricular units 1st sem (evaluations),4,0.025352889310906623
+Curricular units 1st sem (evaluations),4,0.05642860546122952
+Curricular units 1st sem (evaluations),4,0.0423524131262466
+Curricular units 1st sem (approved),4,0.18258848005016576
+Curricular units 1st sem (approved),4,0.21807857376006484
+Curricular units 1st sem (approved),4,0.20618574069139267
+Curricular units 1st sem (approved),4,0.17322426311215633
+Curricular units 1st sem (grade),4,0.015576019149209142
+Curricular units 1st sem (grade),4,0.021387882918441292
+Curricular units 1st sem (grade),4,0.025056836033064633
+Curricular units 1st sem (grade),4,0.03582636357132685
+Curricular units 1st sem (without evaluations),4,-0.002566581788331468
+Curricular units 1st sem (without evaluations),4,-0.003921807565848812
+Curricular units 1st sem (without evaluations),4,-0.0035936558328399926
+Curricular units 1st sem (without evaluations),4,-0.005087662374663071
+Marital status,5,0.0015723270440251014
+Marital status,5,-0.0042524647374805324
+Marital status,5,-0.0018719431161783318
+Marital status,5,-0.001501172630447356
+Application mode,5,0.010451013961168654
+Application mode,5,0.012221146786051573
+Application mode,5,0.012868775456469361
+Application mode,5,0.0168862017398419
+Application order,5,0.012854944337086116
+Application order,5,0.008111183321008797
+Application order,5,0.005296435393803867
+Application order,5,-0.0017559816270051876
+Course,5,0.02648588845243971
+Course,5,0.027546595979033084
+Course,5,0.015487314976675326
+Course,5,0.023327282035395802
+Daytime/evening attendance,5,0.0007818352371222748
+Daytime/evening attendance,5,0.0036834136379028104
+Daytime/evening attendance,5,-0.0014206521444565245
+Daytime/evening attendance,5,-0.003280323648873873
+Previous qualification,5,0.00012591114991677976
+Previous qualification,5,0.005652704695649713
+Previous qualification,5,0.001552140021111148
+Previous qualification,5,-0.0034265530944297407
+Previous qualification (grade),5,0.004806482209302243
+Previous qualification (grade),5,0.004951643236644099
+Previous qualification (grade),5,0.006541447426078872
+Previous qualification (grade),5,0.002137109062939846
+Nacionality,5,0.0
+Nacionality,5,0.0022448331374214092
+Nacionality,5,0.0001073883866835601
+Nacionality,5,0.0
+Mother's qualification,5,-0.0006257594671094102
+Mother's qualification,5,0.006588374776970496
+Mother's qualification,5,0.002150107959520753
+Mother's qualification,5,-0.003738805351086616
+Father's qualification,5,0.0022498036510506525
+Father's qualification,5,-0.004592689464806621
+Father's qualification,5,0.0017678066826933847
+Father's qualification,5,-0.0025922094525103745
+Mother's occupation,5,0.0012768284151447595
+Mother's occupation,5,0.0018431388940158833
+Mother's occupation,5,0.0007667009348677478
+Mother's occupation,5,0.005673953149320732
+Father's occupation,5,0.010369226101435869
+Father's occupation,5,0.004955086449164314
+Father's occupation,5,0.02123373558258468
+Father's occupation,5,0.013493218350140834
+Admission grade,5,0.0056928189697704745
+Admission grade,5,0.01000351130402255
+Admission grade,5,0.003032867602466016
+Admission grade,5,0.014281904622460595
+Displaced,5,0.009485899566310074
+Displaced,5,0.004478646537673048
+Displaced,5,0.00741523639295627
+Displaced,5,0.0030004755740060673
+Educational special needs,5,-4.310579170063722e-05
+Educational special needs,5,-4.310579170063722e-05
+Educational special needs,5,0.0010328726508480601
+Educational special needs,5,-4.310579170063722e-05
+Gender,5,0.008001046922778365
+Gender,5,-0.006099104275500089
+Gender,5,0.005336110492895174
+Gender,5,0.007927413450387277
+Age at enrollment,5,0.009842003516580267
+Age at enrollment,5,0.00559501531273332
+Age at enrollment,5,0.014768716595676579
+Age at enrollment,5,0.015308900471392661
+International,5,0.0
+International,5,0.0
+International,5,0.0
+International,5,0.0
+Curricular units 1st sem (credited),5,0.014811767833646572
+Curricular units 1st sem (credited),5,0.01571278463283443
+Curricular units 1st sem (credited),5,0.009203199579782884
+Curricular units 1st sem (credited),5,0.011187502410276995
+Curricular units 1st sem (enrolled),5,0.03789715929862414
+Curricular units 1st sem (enrolled),5,0.04636487008130319
+Curricular units 1st sem (enrolled),5,0.04439156473816119
+Curricular units 1st sem (enrolled),5,0.0330298561798259
+Curricular units 1st sem (evaluations),5,0.05214665004685948
+Curricular units 1st sem (evaluations),5,0.023086981633765213
+Curricular units 1st sem (evaluations),5,0.04699114006564087
+Curricular units 1st sem (evaluations),5,0.04481474960525822
+Curricular units 1st sem (approved),5,0.2533051060575147
+Curricular units 1st sem (approved),5,0.22791165940342212
+Curricular units 1st sem (approved),5,0.23498240097414996
+Curricular units 1st sem (approved),5,0.19781756561686142
+Curricular units 1st sem (grade),5,0.05107664783130461
+Curricular units 1st sem (grade),5,0.042382040029982915
+Curricular units 1st sem (grade),5,0.03685259699476995
+Curricular units 1st sem (grade),5,0.05171081189939675
+Curricular units 1st sem (without evaluations),5,-0.0005132670254317517
+Curricular units 1st sem (without evaluations),5,-0.0036208721664586774
+Curricular units 1st sem (without evaluations),5,6.886231807690102e-05
+Curricular units 1st sem (without evaluations),5,-0.0035896489538255194

@@ -1,0 +1,4 @@
+Model,CV Macro F1 Mean,CV Macro F1 Std,Train Macro F1 Mean,Train - CV Gap,Best Params
+Logistic Regression,0.6476084557854426,0.015832578742031755,0.6768393180162724,0.029230862230829824,"{""model__C"": 0.04480970566385288, ""model__class_weight"": ""balanced""}"
+Gradient Boosting,0.6343503955706762,0.013500924841179436,0.7798813690837257,0.14553097351304956,"{""model__learning_rate"": 0.12195678219063029, ""model__max_depth"": 3, ""model__min_samples_leaf"": 12, ""model__n_estimators"": 134, ""model__subsample"": 0.9941308100323758}"
+XGBoost,0.6341663699458955,0.018401573109375617,0.8012786850517418,0.16711231510584634,"{""model__colsample_bytree"": 0.7810890415965769, ""model__learning_rate"": 0.1785436060870726, ""model__max_depth"": 4, ""model__min_child_weight"": 8, ""model__n_estimators"": 100, ""model__reg_lambda"": 0.6154014789262349, ""model__subsample"": 0.7045980821176709}"
