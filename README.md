@@ -357,136 +357,124 @@ A separate untuned Logistic Regression model using First Semester + Financial wa
 
 Permutation importance is model-specific and may distribute importance across correlated inputs; it does not imply causality or justify an individual-level intervention by itself.
 
-## Evaluation and Interpretation
+# Evaluation and Interpretation
 
-### Evaluation scope
+## Evaluation Objective and Method
 
-This proof-of-value study examines whether machine learning can help academic advisors identify students who may need additional support. The evaluation considers classification performance across **Dropout**, **Enrolled**, and **Graduate** outcomes and the practical consequences of incorrect predictions.
+This proof-of-value study evaluates whether machine learning can help academic advisors identify students who may need additional support. Macro F1 is the primary metric because it gives equal weight to Dropout, Enrolled, and Graduate outcomes. Dropout recall measures the proportion of actual dropout cases identified, while dropout precision measures the reliability of dropout alerts.
 
-**Macro F1** is the primary comparison metric because it gives equal weight to all three classes. **Dropout recall** measures the proportion of actual dropout cases identified, while **dropout precision** measures the reliability of dropout alerts. Accuracy and the confusion matrix provide additional context.
+The final evaluation used the repository's stratified 80/20 split with random state 42: 3,539 training students and 885 held-out test students. The test set contained 284 Dropout, 159 Enrolled, and 442 Graduate students.
 
-The results presented here come from five-fold stratified cross-validation and out-of-fold predictions on the training data. They provide evidence of predictive potential and support model selection.
+The selected soft-voting ensemble combines Logistic Regression, Gradient Boosting, and XGBoost. Its hyperparameters and membership were fixed using the saved model-selection configuration before test predictions were generated. The original preprocessing and feature engineering were reproduced and fitted on the training records only. No hyperparameters, voting weights, or decision thresholds were adjusted after examining the test results.
 
-### Model selection and practical trade-offs
+The model uses 24 original admission and first-semester inputs, with first-semester indicators created inside the preprocessing pipeline. Second-semester information is excluded. Financial indicators are excluded from the main scenario because their recording dates have not been verified.
 
-A soft-voting ensemble combining tuned Logistic Regression, Gradient Boosting, and XGBoost classifiers was selected based on its mean cross-validation macro F1.
+## Held-Out Test Results and Baseline Comparison
 
-The selected scenario uses admission characteristics and first-semester academic information. Second-semester variables are excluded, and financial indicators are excluded from the main scenario because their recording dates have not been verified.
+All models were evaluated on the same 885 test students. The majority-class baseline always predicts Graduate. The Logistic Regression baseline is untuned, with the same first-semester preprocessing and inputs, `max_iter=2000`, and random state 42; it is distinct from the tuned Logistic Regression ensemble member.
 
-The ensemble achieved the highest mean macro F1 and accuracy among the tuned candidates. Its mean dropout recall of **69.39%** indicates that it identified approximately 69 out of every 100 actual dropout cases across validation folds. Approximately 31% were missed on average.
+| Model | Accuracy | Macro F1 | Dropout Precision | Dropout Recall | Dropout F1 |
+|---|---:|---:|---:|---:|---:|
+| Majority-class baseline | 0.4994 | 0.2221 | 0.0000 | 0.0000 | 0.0000 |
+| Logistic Regression baseline | 0.7153 | 0.6100 | 0.7148 | 0.7148 | 0.7148 |
+| **Selected soft-voting ensemble** | **0.7266** | **0.6549** | **0.7724** | **0.6690** | **0.7170** |
 
-However, its macro F1 exceeded tuned Logistic Regression by only **0.0040**. This small difference does not establish a statistically reliable improvement. Logistic Regression therefore remains a credible alternative when simplicity and ease of interpretation are important.
 
-XGBoost achieved the highest dropout recall, at **70.80%**, but a lower macro F1. The ensemble's selection reflects the project's emphasis on balanced performance across all three classes. A different choice could be appropriate if detecting dropout cases were given greater priority, depending on dropout precision and advising capacity.
+The ensemble achieved **72.66% accuracy** and **0.6549 macro F1**, improving substantially on the majority-class baseline. Compared with untuned Logistic Regression, it improved accuracy by **1.13 percentage points** and macro F1 by **0.0449**. The ensemble therefore provided better balanced performance across the three outcomes on this test set.
 
-### Confusion matrix and error analysis
+However, the ensemble did not dominate every metric. Its dropout precision was higher than Logistic Regression's by **5.76 percentage points**, while its dropout recall was lower by **4.58 percentage points**. The ensemble identified 190 dropout students, compared with 203 for Logistic Regression, and generated 56 false dropout alerts, compared with 81 for Logistic Regression. Its dropout F1 advantage was small: approximately **0.0022**.
 
-Out-of-fold predictions from the **untuned first-semester XGBoost model** provide preliminary evidence about classification errors. Each prediction was generated while the corresponding student was excluded from that fold's training data.
+These results identify a practical trade-off. The ensemble provides more reliable dropout alerts and higher overall macro F1, while the baseline detects more actual dropout cases. The operational choice should also consider advising capacity and the consequences of missed cases and false alerts.
 
-The following matrix describes this comparison model across **3,539 training records**. It does not represent the selected ensemble's performance.
+## Comparison with Cross-Validation Performance
+
+| Metric | Training CV Mean | Held-Out Test |
+|---|---:|---:|
+| Macro F1 | 0.6516 | 0.6549 |
+| Accuracy | 0.7304 | 0.7266 |
+| Dropout recall | 0.6939 | 0.6690 |
+
+The ensemble's test macro F1 was close to its cross-validation mean, and accuracy decreased by approximately 0.39 percentage points. Dropout recall decreased by approximately 2.49 percentage points. These results are broadly consistent with the training-stage estimates, although one random held-out split does not establish performance across future cohorts or other institutions. Small differences should not be interpreted as statistically reliable improvements without additional uncertainty analysis.
+
+## Confusion Matrix and Class-Level Performance
+
+The following confusion matrix describes the **selected ensemble on the held-out test set**. Rows show actual outcomes and columns show predicted outcomes.
 
 | Actual / Predicted | Dropout | Enrolled | Graduate | Total |
 |---|---:|---:|---:|---:|
-| Dropout | 789 | 132 | 216 | 1,137 |
-| Enrolled | 176 | 199 | 260 | 635 |
-| Graduate | 108 | 117 | 1,542 | 1,767 |
-| **Total** | **1,073** | **448** | **2,018** | **3,539** |
+| Dropout | 190 | 42 | 52 | 284 |
+| Enrolled | 37 | 62 | 60 | 159 |
+| Graduate | 19 | 32 | 391 | 442 |
+| **Total** | **246** | **136** | **503** | **885** |
 
+| Class | Precision | Recall | F1 | Support |
+|---|---:|---:|---:|---:|
+| Dropout | 0.7724 | 0.6690 | 0.7170 | 284 |
+| Enrolled | 0.4559 | 0.3899 | 0.4203 | 159 |
+| Graduate | 0.7773 | 0.8846 | 0.8275 | 442 |
 
-| Class | Precision | Recall | F1 |
-|---|---:|---:|---:|
-| Dropout | 0.7353 | 0.6939 | 0.7140 |
-| Enrolled | 0.4442 | 0.3134 | 0.3675 |
-| Graduate | 0.7641 | 0.8727 | 0.8148 |
+### What Worked
 
-#### What Worked
+Graduate was the strongest class, with **88.46% recall** and **0.8275 F1**. The ensemble also correctly identified **190 of 284 dropout students**. Its dropout precision of **77.24%** means that approximately 77 of every 100 dropout alerts matched the observed Dropout outcome in this test sample.
 
-Graduate was the strongest class, with recall of **87.27%** and F1 of **0.8148**. The model also correctly identified **789 of 1,137 dropout cases**, showing that first-semester information contains useful signals for identifying academic risk.
+### What Remained Difficult
 
-#### What Remained Difficult
+Enrolled remained the weakest class, with **38.99% recall** and **0.4203 F1**. Only 62 of 159 Enrolled students were correctly classified. The most frequent individual error was predicting Graduate for an Enrolled student, occurring in **60 cases**.
 
-Enrolled was the weakest class, with recall of **31.34%** and F1 of **0.3675**. The most frequent error type was predicting Graduate for an Enrolled student, occurring in **260 cases**.
+Enrolled records students still studying at the observation point. Their eventual graduation or dropout outcomes are unknown. This limits interpretation of the class. Its smaller sample size and overlap with other student profiles are possible explanations for difficulty, rather than explanations established by this evaluation.
 
-Enrolled represents students who were still studying at the observation point. Their eventual graduation or dropout outcomes are unknown. This complicates interpretation because the model predicts the recorded status rather than an eventual outcome. The available results do not establish the specific causes of these errors.
+### Missed Dropout Cases
 
-#### Missed Dropout Cases
+The ensemble missed **94 of 284 dropout cases (33.10%)**: 42 were predicted as Enrolled and 52 as Graduate. If outreach relied heavily on predictions, these students could receive lower priority. A prediction of Graduate should therefore not override other evidence or prevent a student from receiving assistance.
 
-The model missed **348 actual dropout cases**: 216 were predicted as Graduate and 132 as Enrolled. If outreach depended heavily on model predictions, these students could receive lower priority despite subsequently dropping out.
+### False Dropout Alerts
 
-A prediction of Graduate should therefore not prevent a student from receiving assistance or override other evidence available to advisors.
+The ensemble incorrectly flagged **56 non-dropout students**: 37 Enrolled students and 19 Graduates. These represented **22.76% of its 246 dropout alerts**. Additional outreach could create workload and unnecessary concern, although a student who does not drop out may still benefit from support. The practical value of outreach requires separate assessment.
 
-#### False Dropout Alerts
+### Additional Information for Understanding Errors
 
-The model incorrectly classified **284 students as Dropout**, including 176 Enrolled students and 108 Graduates. Approximately **26.47%** of its dropout alerts did not match the observed Dropout label.
+Attendance, recent changes in engagement, employment demands, caregiving responsibilities, and student-reported circumstances could help advisors understand cases not explained by academic and administrative records. These are proposed directions for investigation, not verified causes of the observed errors. Any model changes motivated by this analysis should be developed using training or validation data and assessed on fresh independent data.
 
-False alerts could increase advising workload and create unnecessary concern. However, an incorrect dropout prediction does not establish that support would be unhelpful. The practical value of outreach must be assessed through student and advisor outcomes as well as classification metrics.
+## Interpretation of the Main Findings
 
-#### Additional Information for Understanding Errors
+### First-Semester Information Adds Predictive Value
 
-Attendance, recent engagement changes, employment demands, caregiving responsibilities, and students' own explanations could provide context that academic and administrative records do not capture.
+In the existing fixed Logistic Regression cross-validation comparison, adding first-semester information increased macro F1 from **0.4924 to 0.6206** and dropout recall from **52.94% to 69.66%**. The gains of 0.1282 in macro F1 and 16.72 percentage points in dropout recall support the predictive value of observed academic progress beyond admission characteristics.
 
-These are proposed avenues for investigation rather than verified causes of the observed errors. Their usefulness would require further validation.
+These are training-stage feature-set comparisons, separate from the final test results. They support reassessment after the first semester, while recognizing that some students may need assistance before these results become available.
 
-### Interpretation of the main findings
+### Model Complexity and Practical Value
 
-#### First-Semester Information Improves Prediction
+The ensemble improved test macro F1 over untuned Logistic Regression, but its dropout F1 was only slightly higher and its dropout recall was lower. Model complexity should therefore be justified by the objective and the observed trade-off rather than accuracy alone.
 
-Under a fixed Logistic Regression comparison, adding first-semester academic information increased macro F1 from **0.4924 to 0.6206** and dropout recall from **52.94% to 69.66%**.
+### Financial Indicators and Feature Importance
 
-The improvements of **0.1282 in macro F1** and **16.72 percentage points in dropout recall** indicate that observed academic progress provides substantial predictive information beyond admission characteristics.
+The existing training-stage comparison showed that adding financial indicators increased first-semester Logistic Regression macro F1 from **0.6206 to 0.6669**. Their recording dates remain unverified, so these variables were excluded from the final ensemble's inputs.
 
-This supports reassessing students after the first semester. However, the additional information becomes available later, and some students may need assistance before first-semester results are recorded.
-
-#### More Complex Models Did Not Always Perform Better
-
-Tuned Logistic Regression achieved a higher macro F1 than either tuned boosting model and performed close to the ensemble. Its macro F1 increased from **0.6206 before tuning to 0.6476 afterward**.
-
-This finding shows that careful tuning of a simpler model can be competitive with more complex methods. The ensemble's modest advantage should be considered alongside its additional complexity.
-
-#### Financial Information Shows Predictive Potential
-
-Adding financial indicators increased macro F1 from **0.6206 to 0.6669** in the fixed first-semester Logistic Regression comparison.
-
-However, the recording dates of scholarship status, debtor status, and tuition payment status remain unverified. These results demonstrate predictive associations but do not establish that the variables would be available at the intended prediction date. They are therefore excluded from the main selected scenario.
-
-#### Important Predictors Describe Associations
-
-Permutation importance for tuned Logistic Regression identified first-semester academic measures, including approved curricular units and grades, among the leading predictors. This is consistent with the improvement observed when first-semester information was added.
-
-These importance results describe Logistic Regression rather than directly explaining the ensemble. They also do not establish causation. The analysis does not demonstrate that changing a predictor would prevent dropout or identify the appropriate intervention for an individual student.
+Permutation importance for tuned Logistic Regression identified first-semester academic measures, including approved curricular units and grades, among the leading predictors. These model-specific results do not directly explain the ensemble and do not establish causation or determine which intervention a student needs.
 
 ## Assumptions and Limitations
 
 | Limitation or Assumption | Likely Impact | How It Could Be Addressed |
 |---|---|---|
-| Reported results come from training-data cross-validation, and tuning and selection reused folds. | Performance estimates may be optimistic and do not establish independent test performance. | Validate the fixed model on independent data. |
-| Financial recording dates are unverified. | These predictors may not be available at the intended prediction date. | Verify timestamps before including them in the main model. |
-| First-semester academic results are required. | Equivalent predictions cannot be made at admission. | Investigate admission-stage screening followed by a first-semester update. |
+| Evaluation uses one random held-out split from the same dataset. | Performance may differ for later cohorts or other institutions. | Conduct temporal and external validation and report uncertainty. |
+| Original training software versions were not specified in the saved model handoff. | Reconstructed predictions may differ across software versions. | Retain the evaluation script, dependency versions, and saved predictions. |
+| Financial recording dates are unverified. | Their predictive contribution may not be available at the intended prediction date. | Verify timestamps before incorporating financial inputs. |
+| First-semester results are required. | Equivalent predictions cannot be made at admission. | Investigate admission-stage screening followed by reassessment. |
 | Enrolled is an intermediate status. | Predictions do not establish these students' eventual outcomes. | Obtain longer follow-up or investigate time-to-event modeling. |
-| Historical patterns may change across cohorts or institutions. | Performance could decline in other settings. | Validate on later cohorts and external institutional data. |
-| Aggregate scores may conceal subgroup differences. | Some groups could experience more missed cases or false alerts. | Assess subgroup precision and recall with sample sizes and uncertainty. |
-| Personal circumstances are not fully represented in the predictors. | The model may miss risks that advisors could recognize through conversation. | Investigate additional information where appropriate and retain human review. |
-| Prediction does not establish intervention effectiveness. | Accurate alerts may not lead to reduced dropout. | Conduct a prospective pilot assessing workload, student experience, and outcomes. |
+| Aggregate metrics may conceal subgroup differences. | Some groups may experience more missed cases or false alerts. | Assess subgroup performance with sample sizes and uncertainty. |
+| Personal circumstances are incompletely represented. | The model may miss risks recognized through advisor conversations. | Retain human review and investigate appropriate additional information. |
+| Prediction does not establish intervention effectiveness. | Accurate alerts may not reduce dropout. | Conduct a prospective pilot measuring workload, student experience, and outcomes. |
 
-No operational alert threshold has been established because advising capacity and the consequences of different errors have not been specified. Any future threshold should be chosen using validation data and evaluated independently.
-
-## Outstanding Validation and Reproducibility Items
-
-The README covers the research framing, EDA, preprocessing, model comparison, tuning, interpretation, and limitations, but the empirical evaluation is not yet complete:
-
-- **Independent test evaluation:** the repository contains no final held-out scores, selected-ensemble confusion matrix, class-level precision/recall/F1, or selected-ensemble dropout precision. The XGBoost matrix below the selection discussion is preliminary training out-of-fold evidence only. The reserved test set should be used after the model and pipeline are fixed.
-- **Small result discrepancy:** the initial model-comparison notebook records Admission + Financial Logistic Regression macro F1 **0.5461**, whereas the later fixed-model CSV records **0.5464** (dropout recall **0.5971** versus **0.5980**). Both runs are retained with their provenance. The visible code uses the same split, feature definitions, estimator settings, and folds; the repository does not establish the cause of the difference. Reproduce both runs in a recorded environment before treating them as identical.
-- **Timing and outcome horizon:** verify administrative recording dates, admission-stage availability, and whether any dropout occurred before the intended first-semester prediction date. Financial scenarios remain conditional, and Enrolled students' eventual outcomes remain unknown.
-- **Reproducibility package:** the repository provides executed notebooks and exported tuning results, but no pinned dependency file or serialized selected model. Initial-comparison exports under `part_d_results/` are generated by the notebook but are not committed; their evidence currently resides in notebook outputs. A fully reproducible final run should record package versions, input hash, split verification, and the frozen model configuration.
-- **Application validation:** subgroup performance, calibration, advising capacity, alert thresholds, external or later-cohort validation, and intervention outcomes have not been established.
+No operational alert threshold has been established. The evaluation uses the ensemble's default class prediction, which selects the class with the highest averaged probability. Any future alert policy should account for advising capacity, assess probability calibration, and be developed using validation data before independent evaluation.
 
 ## Conclusion
 
-The study provides promising evidence that first-semester academic information can support student dropout prediction. The selected ensemble achieved a cross-validation macro F1 of **0.6516**, accuracy of **73.04%**, and dropout recall of **69.39%**.
+The held-out evaluation provides evidence of predictive value: the selected ensemble achieved **72.66% accuracy**, **0.6549 macro F1**, **77.24% dropout precision**, and **66.90% dropout recall**. It improved macro F1 over both baselines, while untuned Logistic Regression detected more dropout cases at the cost of more false alerts.
 
-Its advantage over tuned Logistic Regression was modest. Preliminary error analysis also revealed difficulty recognizing Enrolled students and a meaningful number of missed dropout cases. These findings support using predictions to prioritize advisor review and voluntary assistance.
+The central practical limitation is that **94 of 284 dropout cases were missed**, and Enrolled remained difficult to classify. Predictions should support advisor review and voluntary assistance, with other channels available for students whose needs are not identified by the model.
 
-The project demonstrates predictive potential within a proof-of-value study. Further independent validation and an intervention study would be needed to establish whether model-guided outreach improves student outcomes.
+The study supports further investigation of a first-semester early warning system. It does not demonstrate that model-guided outreach reduces dropout; that claim requires a prospective intervention study.
 
 
 ## Repository Guide and Reproduction
