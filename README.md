@@ -500,21 +500,6 @@ The consolidated notebook is the single entry point for the project's explorator
 4. Keep `FAST_MODE=False` for the full configured analysis. A quick run with `FAST_MODE=True` uses fewer search trials and permutation repeats and should not be treated as equivalent to the full run.
 5. Restart the kernel/runtime and run all cells in order. Tables and figures appear below their code cells as execution progresses. Model comparison, tuning, and permutation importance take longer than the initial data checks. Empty outputs in the downloaded notebook do not represent completed results.
 
-### Generated outputs and evaluation scope
-
-Running the notebook creates `combined_results/` in the working folder:
-
-| Generated location | Contents |
-|---|---|
-| `combined_results/eda/` | Exploratory figures, descriptive tables, split assignments, input metadata, and an EDA report. |
-| `combined_results/part_d_results/` | Initial model-comparison metrics, plots, shortlist, and training out-of-fold error summaries. |
-| `combined_results/part_e_results/` | Tuning trials, ensemble comparison, feature-set comparisons, permutation importance, report, and selected model configuration. |
-| `combined_results/environment_metadata.json` | Software versions, input hash, split sizes, and execution settings recorded by the run. |
-
-These are generated files, rather than additional source files that must be downloaded separately. Save the executed notebook and output folder to retain the results. In Colab, download them before ending the runtime session.
-
-The current notebook consolidates the development workflow on 3,539 training records and reserves 885 records for final testing. It does not perform the final held-out evaluation. Running it alone therefore does not reproduce the final-test claims elsewhere in this README; those claims require a separate, saved final-evaluation run. Exact historical package versions were not recorded, so reruns in a different environment may differ.
-
 ## Data Source
 
 Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. [https://doi.org/10.24432/C5MC89](https://doi.org/10.24432/C5MC89).
