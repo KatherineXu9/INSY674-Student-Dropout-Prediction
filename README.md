@@ -216,6 +216,116 @@ The preprocessing pipelines were tested using training data only. A Logistic Reg
 
 The pipelines are designed to be integrated with downstream classification models so that preprocessing parameters can be fitted separately within each cross-validation training fold, reducing the risk of data leakage.
 
+# Model Training and Performance Comparison
+
+### 1. Model Selection
+
+We trained and compared five machine learning models to predict three possible student outcomes: Dropout, Enrolled, and Graduate.
+
+- **Logistic Regression:** A simple and interpretable baseline model.
+- **Decision Tree:** Captures nonlinear relationships and provides interpretable decision rules.
+- **Random Forest:** Combines multiple decision trees to improve prediction stability.
+- **Gradient Boosting:** Builds trees sequentially to correct prediction errors.
+- **XGBoost:** An optimized gradient boosting algorithm designed for efficient and accurate predictions.
+
+Using models from different algorithm families allows us to compare their predictive performance, generalization ability, and effectiveness in identifying students at risk of dropping out.
+
+### 2. Cross-Validation and Evaluation Metrics
+
+The dataset was divided into 80% training data (3,539 observations) and 20% testing data (885 observations), using stratified sampling to preserve the target class distribution.
+
+We applied **Stratified 5-Fold Cross-Validation** to the training set. In each iteration, the model was trained on four folds and validated on the remaining fold. All preprocessing steps were included within the pipeline to prevent data leakage.
+
+We evaluated each model using:
+
+- **Accuracy:** Overall proportion of correctly classified students.
+- **Macro F1:** Average F1 score across all three classes, giving equal importance to each class.
+- **Balanced Accuracy:** Average recall across the three classes.
+- **Dropout Recall:** Proportion of actual dropout students correctly identified.
+- **Dropout Precision:** Proportion of predicted dropout students who actually dropped out.
+
+Macro F1 was selected as the primary metric because the dataset contains imbalanced classes. Dropout Recall was also emphasized because the project's early warning objective requires identifying students who may need additional academic support.
+
+We reported the mean and standard deviation across the five folds to evaluate both predictive performance and stability.
+
+### 3. Model Performance Comparison
+
+The following results are based on the First Semester feature set, which includes admission information and first-semester academic performance.
+
+| Model | Accuracy | Macro F1 | Dropout Recall |
+|---|---:|---:|---:|
+| Logistic Regression | 0.7152 | 0.6206 | 0.6966 |
+| Decision Tree | 0.6199 | 0.5534 | 0.6280 |
+| Random Forest | 0.7245 | 0.6153 | 0.7185 |
+| Gradient Boosting | 0.7251 | 0.6291 | 0.7132 |
+| XGBoost | 0.7149 | 0.6320 | 0.6939 |
+| Majority-Class Baseline | 0.4993 | 0.2220 | 0.0000 |
+
+All five models outperformed the majority-class baseline in Macro F1.
+
+**XGBoost achieved the highest Macro F1 (0.6320 ± 0.0149)**, while Gradient Boosting achieved the highest Accuracy (0.7251). Random Forest achieved the highest Dropout Recall (0.7185).
+
+Although XGBoost ranked first in Macro F1, the difference between XGBoost and Gradient Boosting was relatively small. Therefore, their performance should be compared further during hyperparameter tuning.
+
+### 4. Feature Set Comparison
+
+We also evaluated four feature sets to investigate how prediction performance changes as additional information becomes available.
+
+| Feature Set | Best Model by Macro F1 | Macro F1 |
+|---|---|---:|
+| Admission Only | Logistic Regression | 0.4924 |
+| Admission + Financial | Logistic Regression | 0.5461 |
+| First Semester | XGBoost | 0.6320 |
+| First Semester + Financial | Logistic Regression | 0.6669 |
+
+Two important findings emerged.
+
+**First, first-semester academic performance substantially improved prediction accuracy.** The best Macro F1 increased from 0.4924 using admission-only features to 0.6320 after including first-semester information.
+
+This suggests that students' actual university performance provides valuable information beyond their admission characteristics.
+
+**Second, financial indicators provided additional predictive value.** Adding financial features further improved the best Macro F1 to 0.6669.
+
+However, financial indicators were treated as exploratory features because their exact availability at the prediction date has not yet been verified. Their inclusion in a final early warning system depends on confirming that the information would be available when predictions are made.
+
+Second-semester features were excluded to maintain the early prediction objective and avoid using future academic information.
+
+### 5. Overfitting and Error Analysis
+
+We compared training and cross-validation performance to evaluate potential overfitting.
+
+For the First Semester feature set, XGBoost achieved a training Macro F1 of 0.9994 but a cross-validation Macro F1 of 0.6320. Random Forest showed a similar pattern, suggesting substantial overfitting.
+
+In comparison, Logistic Regression showed a smaller generalization gap, indicating more stable performance on unseen validation folds.
+
+We also examined out-of-fold predictions from the shortlisted models.
+
+For XGBoost:
+
+- Dropout Recall: 69.39%
+- Enrolled Recall: 31.34%
+- Graduate Recall: 87.27%
+
+The model performed best at identifying graduates but struggled to distinguish enrolled students from the other two groups.
+
+The error analysis identified 216 actual dropout students incorrectly classified as graduates and 260 enrolled students incorrectly classified as graduates.
+
+These errors are particularly important for an early warning system because failing to identify potential dropouts may prevent institutions from providing timely support.
+
+### 6. Model Shortlisting
+
+Based on Macro F1 performance using the First Semester feature set, we selected three models for further optimization:
+
+1. **XGBoost:** Highest Macro F1, with potential for improvement through regularization and hyperparameter tuning.
+2. **Gradient Boosting:** Competitive overall performance, strong Dropout Recall, and a smaller generalization gap than XGBoost.
+3. **Logistic Regression:** Strong and relatively stable performance despite its simpler structure, making it a useful interpretable benchmark.
+
+These models represent different approaches and provide a meaningful comparison for the next stage.
+
+Although Random Forest achieved the highest Dropout Recall, it was not included in the initial top three because the shortlist was ranked primarily by Macro F1.
+
+The First Semester + Financial scenario also produced promising results and should be reconsidered once the timing of financial information is verified.
+
 # Evaluation and Interpretation
 
 ## Evaluation Objective
