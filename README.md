@@ -1,6 +1,6 @@
 # Student Dropout and Academic Success Prediction
 
-A team machine learning project for INSY674. **Current status:** model development and training-data cross-validation are documented. A held-out evaluation is reported below, but its execution code and saved predictions are not present in the repository, so those test results remain unverified. The saved ensemble training-CV macro F1 is 0.6516; it is distinct from the reported test macro F1 of 0.6549.
+A team machine learning project for INSY674. **Current status:** model development, training-data cross-validation, and held-out evaluation are complete. The final evaluation was reproduced on 2026-10-28 from the saved model configuration; its scores and confusion matrix match the results reported below. Execution evidence and software versions are saved with the evaluation results. The saved ensemble training-CV macro F1 is 0.6516; it is distinct from the reported test macro F1 of 0.6549.
 
 ## Project Objective
 
@@ -322,7 +322,7 @@ A three-model soft-voting ensemble was compared with each tuned model using the 
 | Gradient Boosting    |          0.6344 |         0.0135 |                0.7053 |               0.0182 |          0.7259 |
 | XGBoost              |          0.6342 |         0.0184 |                0.708  |               0.0187 |          0.7268 |
 
-**Training-CV selection:** Soft Voting Ensemble. These results support model selection but may be optimistic because the same training folds inform tuning and selection. This tuning stage does not evaluate the 885 held-out records; the later Evaluation and Interpretation section reports test results separately, subject to the evidence limitation stated there.
+**Training-CV selection:** Soft Voting Ensemble. These results support model selection but may be optimistic because the same training folds inform tuning and selection. This tuning stage does not evaluate the 885 held-out records; the later Evaluation and Interpretation section reports the independently reproduced held-out results separately.
 
 ### Incremental academic and financial information
 To hold modeling conditions constant, we compared all four feature sets using the same untuned Logistic Regression estimator and the same five stratified folds:
@@ -361,7 +361,7 @@ Permutation importance is model-specific and may distribute importance across co
 
 # Evaluation and Interpretation
 
-**Evidence status:** the following test scores and confusion matrix are reported in the README, but the repository currently contains no corresponding final-evaluation code, executed output, or saved test predictions. Their arithmetic is consistent; their origin and execution procedure have not been verified. The procedure described below is the reported procedure, not an independently confirmed run. These results require supporting execution evidence before being treated as validated findings.
+**Reproduction evidence:** [the evaluation script](insy674_partb_result/part_f_results.py) was executed successfully on 2026-10-28 using the original dataset and saved model configuration, without changing model parameters or thresholds. Its three model-comparison rows and every ensemble confusion-matrix count match this README at the displayed precision. [The verification summary](evaluation_results/RUN_SUMMARY.md), [test metrics](evaluation_results/test_model_comparison.csv), [confusion matrix](evaluation_results/test_confusion_matrix.csv), and [environment metadata](evaluation_results/evaluation_metadata.json) document this run.
 
 ## Evaluation Objective and Method
 
@@ -474,7 +474,7 @@ No operational alert threshold has been established. The evaluation uses the ens
 
 ## Conclusion
 
-Subject to verification of the reported held-out evaluation, the results suggest predictive value: the selected ensemble achieved **72.66% accuracy**, **0.6549 macro F1**, **77.24% dropout precision**, and **66.90% dropout recall**. It improved macro F1 over both baselines, while untuned Logistic Regression detected more dropout cases at the cost of more false alerts.
+The reproduced held-out evaluation provides evidence of predictive value: the selected ensemble achieved **72.66% accuracy**, **0.6549 macro F1**, **77.24% dropout precision**, and **66.90% dropout recall**. It improved macro F1 over both baselines, while untuned Logistic Regression detected more dropout cases at the cost of more false alerts.
 
 The central practical limitation is that **94 of 284 dropout cases were missed**, and Enrolled remained difficult to classify. Predictions should support advisor review and voluntary assistance, with other channels available for students whose needs are not identified by the model.
 
@@ -488,10 +488,11 @@ The consolidated notebook is the single entry point for the project's explorator
 | File | Purpose |
 |---|---|
 | [README.md](README.md) | Project overview, methods, reported results, interpretation, and limitations. |
-| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Consolidated analysis and modeling code, arranged to run from top to bottom. |
+| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Consolidated exploratory analysis and model-development code, arranged to run from top to bottom. |
+| [Final evaluation script](insy674_partb_result/part_f_results.py) | Rebuilds the selected model from the saved configuration and evaluates the held-out test set. |
 | [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) | Original dataset archive containing the semicolon-separated `data.csv`. |
 
-### Run the notebook
+### Run the analysis
 
 1. Download `Student_Dropout.ipynb` and the dataset ZIP into the same folder. Open the notebook in Jupyter Notebook, JupyterLab, or Google Colab. In Colab, upload the dataset ZIP to the runtime's working folder. GitHub displays the notebook but does not execute it.
 2. Use a Python environment with pandas, NumPy, SciPy, scikit-learn, XGBoost, Matplotlib, seaborn 0.13 or later, IPython, and tabulate. If packages are missing, run the following in a notebook cell, then restart the kernel/runtime:
@@ -503,6 +504,14 @@ The consolidated notebook is the single entry point for the project's explorator
 3. Keep the ZIP compressed: the notebook reads `data.csv` directly from it. Alternatively, extract `data.csv` beside the notebook without changing its row order. The ZIP lookup also accepts download suffixes such as ` (1)`.
 4. Keep `FAST_MODE=False` for the full configured analysis. A quick run with `FAST_MODE=True` uses fewer search trials and permutation repeats and should not be treated as equivalent to the full run.
 5. Restart the kernel/runtime and run all cells in order. Tables and figures appear below their code cells as execution progresses. Model comparison, tuning, and permutation importance take longer than the initial data checks. Empty outputs in the downloaded notebook do not represent completed results.
+
+To reproduce the final held-out evaluation, download or clone the complete repository (including the saved model configuration), then run from the repository root:
+
+```bash
+python insy674_partb_result/part_f_results.py
+```
+
+The consolidated notebook covers model development; the evaluation script performs the final test. Archived results from the verified run are linked in Evaluation and Interpretation. Original training-environment versions were not recorded; the verified evaluation environment is recorded in its metadata.
 
 ## Data Source
 

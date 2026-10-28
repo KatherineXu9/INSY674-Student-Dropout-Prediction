@@ -1,0 +1,66 @@
+{
+  "selection_feature_set": "First Semester",
+  "feature_columns": [
+    "Marital status",
+    "Application mode",
+    "Application order",
+    "Course",
+    "Daytime/evening attendance",
+    "Previous qualification",
+    "Previous qualification (grade)",
+    "Nacionality",
+    "Mother's qualification",
+    "Father's qualification",
+    "Mother's occupation",
+    "Father's occupation",
+    "Admission grade",
+    "Displaced",
+    "Educational special needs",
+    "Gender",
+    "Age at enrollment",
+    "International",
+    "Curricular units 1st sem (credited)",
+    "Curricular units 1st sem (enrolled)",
+    "Curricular units 1st sem (evaluations)",
+    "Curricular units 1st sem (approved)",
+    "Curricular units 1st sem (grade)",
+    "Curricular units 1st sem (without evaluations)"
+  ],
+  "chosen_candidate": "Soft Voting Ensemble",
+  "tuned_parameters": {
+    "XGBoost": {
+      "model__colsample_bytree": 0.7810890415965769,
+      "model__learning_rate": 0.1785436060870726,
+      "model__max_depth": 4,
+      "model__min_child_weight": 8,
+      "model__n_estimators": 100,
+      "model__reg_lambda": 0.6154014789262349,
+      "model__subsample": 0.7045980821176709
+    },
+    "Gradient Boosting": {
+      "model__learning_rate": 0.12195678219063029,
+      "model__max_depth": 3,
+      "model__min_samples_leaf": 12,
+      "model__n_estimators": 134,
+      "model__subsample": 0.9941308100323758
+    },
+    "Logistic Regression": {
+      "model__C": 0.04480970566385288,
+      "model__class_weight": "balanced"
+    }
+  },
+  "train_test_split": {
+    "test_size": 0.2,
+    "stratify": "Target",
+    "random_state": 42
+  },
+  "cv": {
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42
+  },
+  "primary_selection_metric": "macro F1",
+  "important_note": "CV selection only. Held-out test set NOT accessed in Part E.",
+  "financial_features_timing_verified": false,
+  "fast_mode": false
+}

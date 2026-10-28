@@ -1,0 +1,7 @@
+{
+  "correctly_identified_dropout": 190,
+  "missed_dropout": 94,
+  "false_dropout_alerts": 56,
+  "actual_dropout_total": 284,
+  "predicted_dropout_total": 246
+}

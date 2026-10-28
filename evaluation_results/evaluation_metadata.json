@@ -1,0 +1,23 @@
+{
+  "python": "3.13.9",
+  "numpy": "2.3.5",
+  "pandas": "2.3.3",
+  "scikit-learn": "1.7.2",
+  "xgboost": "3.4.1",
+  "random_state": 42,
+  "training_records": 3539,
+  "test_records": 885,
+  "test_class_counts": {
+    "Graduate": 442,
+    "Dropout": 284,
+    "Enrolled": 159
+  },
+  "model_config_sha256": "51589f9b975667cd04fb7edb096db72aba2e28e775e8d686250f04fffe3dc019",
+  "dataset_sha256": "1b1cef8ac84b532c1124123c060f2da6da7ba9bfec54f4b3713dc31f1610340c",
+  "note": "Saved model configuration used without test-set tuning. Results may differ across software versions.",
+  "run_date": "2026-10-28",
+  "dataset_sha256_definition": "SHA-256 of cleaned DataFrame serialized with pandas to_csv(index=False); differs from original CSV bytes",
+  "dataset_archive_sha256": "e90e55fd65ec462ae283ebeb2cca409319e3460ed898d8754f62fb35cc83a65d",
+  "original_csv_sha256": "3ef126de5cefff26eb11fbb4237f1a1401cb64b488e2f1d598c23cedeb4c45ae",
+  "evaluation_script_sha256": "833531f58037176f6d97bdf9be14565300c81cc0a8e34c032234120957b910fe"
+}
