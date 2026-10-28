@@ -479,31 +479,41 @@ The study supports further investigation of a first-semester early warning syste
 
 ## Repository Guide and Reproduction
 
-Existing filenames are retained so that figures, notebooks, and result paths remain traceable.
+The consolidated notebook is the single entry point for the project's exploratory analysis, preprocessing, model comparison, hyperparameter tuning, ensemble comparison, and feature importance.
 
-| Artifact | Location |
+| File | Purpose |
 |---|---|
-| Original dataset archive | [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) |
-| EDA script and detailed report | [Script](insy674_partb_result/PartB_EDA_Script.py), [report](insy674_partb_result/reports/partb_eda_report.md) |
-| EDA tables and split metadata | [tables/](insy674_partb_result/tables/), [split assignments](insy674_partb_result/tables/split_assignments.csv), [run metadata](insy674_partb_result/tables/run_metadata.json) |
-| Preprocessing notebook | [Part C.ipynb](insy674_partb_result/Part%20C.ipynb) |
-| Initial model comparison and OOF outputs | [Part_D.ipynb](insy674_partb_result/Part_D.ipynb) |
-| Tuning, ensemble, ablation, and importance notebook | [Part E.ipynb](insy674_partb_result/Part%20E.ipynb) |
-| Detailed tuning report | [PART_E_REPORT.md](insy674_partb_result/part_e_results/PART_E_REPORT.md) |
-| Tuned candidate metrics | [candidate_ensemble_cv.csv](insy674_partb_result/part_e_results/candidate_ensemble_cv.csv), [tuning_comparison.csv](insy674_partb_result/part_e_results/tuning_comparison.csv) |
-| Fixed-estimator feature comparison | [academic_financial_ablation.csv](insy674_partb_result/part_e_results/academic_financial_ablation.csv) |
-| Permutation importance | [Primary summary](insy674_partb_result/part_e_results/perm_primary_summary.csv), [conditional financial summary](insy674_partb_result/part_e_results/perm_financial_summary.csv) |
-| Selected configuration and tuned parameters | [model_selection_for_F.json](insy674_partb_result/part_e_results/model_selection_for_F.json) |
+| [README.md](README.md) | Project overview, methods, reported results, interpretation, and limitations. |
+| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Consolidated analysis and modeling code, arranged to run from top to bottom. |
+| [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) | Original dataset archive containing the semicolon-separated `data.csv`. |
 
-Use Python with pandas, NumPy, SciPy, scikit-learn, XGBoost, Matplotlib, seaborn, Jupyter/IPython, and tabulate for report table export. Exact versions were not recorded in a dependency lockfile.
+### Run the notebook
 
-1. Extract `data.csv` from the archive without changing row order. The preprocessing and initial-comparison notebooks read `data.csv` from their working directory, so place it beside those notebooks when running there.
-2. From the repository root, regenerate EDA with an explicit input and output path:
-   `python insy674_partb_result/PartB_EDA_Script.py --data insy674_partb_result/data.csv --output insy674_partb_result --seed 42 --test-size 0.2`.
-   Explicit arguments avoid the script's machine-specific input default.
-3. Run the preprocessing and initial-comparison notebooks from top to bottom. The latter includes its own preprocessing setup and writes `part_d_results/` relative to its working directory.
-4. Run the tuning notebook from its directory with `FAST_MODE=False`. It can locate the repository archive automatically and writes `part_e_results/` relative to the working directory. The saved run uses 10 randomized trials each for XGBoost and Gradient Boosting, 8 for Logistic Regression, and 4 permutation repeats per fold. The soft-voting ensemble averages the three tuned members' class probabilities with equal weights.
-5. Preserve the 885 test records for the fixed model's final evaluation. Regenerating CV is a separate operation from testing, and this README revision does not report a new model run.
+1. Download `Student_Dropout.ipynb` and the dataset ZIP into the same folder. Open the notebook in Jupyter Notebook, JupyterLab, or Google Colab. In Colab, upload the dataset ZIP to the runtime's working folder. GitHub displays the notebook but does not execute it.
+2. Use a Python environment with pandas, NumPy, SciPy, scikit-learn, XGBoost, Matplotlib, seaborn 0.13 or later, IPython, and tabulate. If packages are missing, run the following in a notebook cell, then restart the kernel/runtime:
+
+   ```python
+   %pip install pandas numpy scipy scikit-learn xgboost matplotlib "seaborn>=0.13" ipython tabulate
+   ```
+
+3. Keep the ZIP compressed: the notebook reads `data.csv` directly from it. Alternatively, extract `data.csv` beside the notebook without changing its row order. The ZIP lookup also accepts download suffixes such as ` (1)`.
+4. Keep `FAST_MODE=False` for the full configured analysis. A quick run with `FAST_MODE=True` uses fewer search trials and permutation repeats and should not be treated as equivalent to the full run.
+5. Restart the kernel/runtime and run all cells in order. Tables and figures appear below their code cells as execution progresses. Model comparison, tuning, and permutation importance take longer than the initial data checks. Empty outputs in the downloaded notebook do not represent completed results.
+
+### Generated outputs and evaluation scope
+
+Running the notebook creates `combined_results/` in the working folder:
+
+| Generated location | Contents |
+|---|---|
+| `combined_results/eda/` | Exploratory figures, descriptive tables, split assignments, input metadata, and an EDA report. |
+| `combined_results/part_d_results/` | Initial model-comparison metrics, plots, shortlist, and training out-of-fold error summaries. |
+| `combined_results/part_e_results/` | Tuning trials, ensemble comparison, feature-set comparisons, permutation importance, report, and selected model configuration. |
+| `combined_results/environment_metadata.json` | Software versions, input hash, split sizes, and execution settings recorded by the run. |
+
+These are generated files, rather than additional source files that must be downloaded separately. Save the executed notebook and output folder to retain the results. In Colab, download them before ending the runtime session.
+
+The current notebook consolidates the development workflow on 3,539 training records and reserves 885 records for final testing. It does not perform the final held-out evaluation. Running it alone therefore does not reproduce the final-test claims elsewhere in this README; those claims require a separate, saved final-evaluation run. Exact historical package versions were not recorded, so reruns in a different environment may differ.
 
 ## Data Source
 
