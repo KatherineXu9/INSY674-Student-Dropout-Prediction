@@ -1,6 +1,6 @@
 # Student Dropout and Academic Success Prediction
 
-A team machine learning project for INSY674. **Current status:** model development and training-data cross-validation are documented; independent evaluation on the reserved 885-record test set remains outstanding. The selected soft-voting ensemble has a training-CV macro F1 of 0.6516, which is not a final test score.
+A team machine learning project for INSY674. **Current status:** model development and training-data cross-validation are documented. A held-out evaluation is reported below, but its execution code and saved predictions are not present in the repository, so those test results remain unverified. The saved ensemble training-CV macro F1 is 0.6516; it is distinct from the reported test macro F1 of 0.6549.
 
 ## Project Objective
 
@@ -40,7 +40,7 @@ This is a supervised multiclass classification task because each historical stud
 
 We compare two prediction stages, with financial variants treated as conditional analyses:
 
-- **Enrollment scenario:** Use only features confirmed to be available at enrollment.
+- **Enrollment scenario:** Use candidate admission-stage features, subject to verification of their recording dates.
 - **First-semester scenario:** Add academic results available at the end of the first semester.
 
 Second-semester academic features are excluded from all modeled scenarios. Financial recording times remain unverified. The admission feature group is an operational assumption about availability, rather than a fully verified timestamp dictionary.
@@ -69,7 +69,7 @@ This EDA examines outcome imbalance, academic patterns, financial indicators and
 ### Source, scope and reproducibility
 The UCI dataset contains 4,424 student records, 36 input variables and Target. The three labels describe status at the end of the normal course duration. Enrolled is an unresolved eventual outcome, not a guarantee of future graduation.
 
-A stratified 80%/20% split with random_state=42 assigns **3,539 records to training and 885 to held-out testing**. All outcome-related figures and summaries below use training records only. No held-out performance is calculated. The input file structure and full-row duplicates are checked globally; these checks do not select predictors. `tables/split_assignments.csv` stores the shared row assignment and `run_metadata.json` records the source hash. The preprocessing, model comparison, and tuning notebooks recreate this split using the same seed and stratification; reproduction also requires the original row order.
+A stratified 80%/20% split with random_state=42 assigns **3,539 records to training and 885 to held-out testing**. All outcome-related figures and summaries in this exploratory analysis use training records only. This stage does not calculate held-out performance. The input file structure and full-row duplicates are checked globally; these checks do not select predictors. `tables/split_assignments.csv` stores the shared row assignment and `run_metadata.json` records the source hash. The preprocessing, model comparison, and tuning notebooks recreate this split using the same seed and stratification; reproduction also requires the original row order.
 
 Six second-semester fields are excluded from substantive exploration. The first-semester scenario includes earlier information plus six first-semester measurements. Availability dates of financial and administrative information remain unverified: results involving these fields are descriptive, conditional on later confirming availability.
 
@@ -276,7 +276,7 @@ For the First Semester feature set, XGBoost achieved a training Macro F1 of 0.99
 
 In comparison, Logistic Regression showed a smaller generalization gap, indicating more stable performance on unseen validation folds.
 
-Out-of-fold errors for the untuned XGBoost comparison model are examined in Evaluation and Interpretation below.
+Preliminary out-of-fold error analysis for the untuned XGBoost comparison model is implemented in the notebook's initial model-comparison section. It is separate from the selected ensemble's reported held-out error analysis in Evaluation and Interpretation.
 
 ### Model Shortlisting
 
@@ -295,6 +295,8 @@ The First Semester + Financial scenario also produced promising results and shou
 ## Hyperparameter Tuning and Feature Importance
 
 ### Objective and reproducibility
+
+The CV tables and figures in this section retain the repository's saved historical run. A rerun in a different environment should be recorded separately rather than silently substituted. If a new run becomes the reference experiment, update its tables, figures, interpretation, and final evaluation together, and save the executed notebook and dependency versions. Matching model parameters alone does not establish identical predictions across environments.
 
 Sources: [tuning report](insy674_partb_result/part_e_results/PART_E_REPORT.md) and the exported CSV files linked in the repository guide.
 Tuning uses the same stratified 80/20 split (seed 42), five-fold stratified CV, and four feature sets as the initial model comparison. Only training rows are used, and the 885 test records remain reserved for independent evaluation.
@@ -320,7 +322,7 @@ A three-model soft-voting ensemble was compared with each tuned model using the 
 | Gradient Boosting    |          0.6344 |         0.0135 |                0.7053 |               0.0182 |          0.7259 |
 | XGBoost              |          0.6342 |         0.0184 |                0.708  |               0.0187 |          0.7268 |
 
-**Provisional training-CV choice:** Soft Voting Ensemble. These cross-validation results help with selection but may be optimistic because the same training data informs tuning and selection. The locked model still requires evaluation once on the reserved held-out test set. No final-test performance claim is made here.
+**Training-CV selection:** Soft Voting Ensemble. These results support model selection but may be optimistic because the same training folds inform tuning and selection. This tuning stage does not evaluate the 885 held-out records; the later Evaluation and Interpretation section reports test results separately, subject to the evidence limitation stated there.
 
 ### Incremental academic and financial information
 To hold modeling conditions constant, we compared all four feature sets using the same untuned Logistic Regression estimator and the same five stratified folds:
@@ -358,6 +360,8 @@ A separate untuned Logistic Regression model using First Semester + Financial wa
 Permutation importance is model-specific and may distribute importance across correlated inputs; it does not imply causality or justify an individual-level intervention by itself.
 
 # Evaluation and Interpretation
+
+**Evidence status:** the following test scores and confusion matrix are reported in the README, but the repository currently contains no corresponding final-evaluation code, executed output, or saved test predictions. Their arithmetic is consistent; their origin and execution procedure have not been verified. The procedure described below is the reported procedure, not an independently confirmed run. These results require supporting execution evidence before being treated as validated findings.
 
 ## Evaluation Objective and Method
 
@@ -470,7 +474,7 @@ No operational alert threshold has been established. The evaluation uses the ens
 
 ## Conclusion
 
-The held-out evaluation provides evidence of predictive value: the selected ensemble achieved **72.66% accuracy**, **0.6549 macro F1**, **77.24% dropout precision**, and **66.90% dropout recall**. It improved macro F1 over both baselines, while untuned Logistic Regression detected more dropout cases at the cost of more false alerts.
+Subject to verification of the reported held-out evaluation, the results suggest predictive value: the selected ensemble achieved **72.66% accuracy**, **0.6549 macro F1**, **77.24% dropout precision**, and **66.90% dropout recall**. It improved macro F1 over both baselines, while untuned Logistic Regression detected more dropout cases at the cost of more false alerts.
 
 The central practical limitation is that **94 of 284 dropout cases were missed**, and Enrolled remained difficult to classify. Predictions should support advisor review and voluntary assistance, with other channels available for students whose needs are not identified by the model.
 
