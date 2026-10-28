@@ -1,15 +1,14 @@
-# INSY674-Student-Dropout-Prediction
-Predicting student dropout and academic success using machine learning.
-
 # Student Dropout and Academic Success Prediction
 
-## 1. Project Objective
+A team machine learning project for INSY674. **Current status:** model development and training-data cross-validation are documented; independent evaluation on the reserved 885-record test set remains outstanding. The selected soft-voting ensemble has a training-CV macro F1 of 0.6516, which is not a final test score.
+
+## Project Objective
 
 This project investigates whether machine learning can identify students at risk of dropping out early enough to support university intervention. It predicts three academic statuses—Dropout, Enrolled, and Graduate—and examines the predictive value of academic performance and financial indicators.
 
 The intended users are academic advisors and student support teams. Predictions could help them prioritize outreach and assess whether students need tutoring, financial guidance, or other support. This proof-of-value study evaluates predictive potential; it does not establish that using the model will reduce dropout.
 
-## 2. Research Questions
+## Research Questions
 
 1. How effectively can machine learning distinguish between students who drop out, remain enrolled, or graduate?
 2. How does prediction performance change when first-semester academic results are added to enrollment information?
@@ -17,7 +16,7 @@ The intended users are academic advisors and student support teams. Predictions 
 
 The third question concerns predictive associations. It does not establish whether academic or financial difficulties cause students to drop out.
 
-## 3. Dataset Description
+## Dataset Description
 
 The project uses the Predict Students’ Dropout and Academic Success dataset from the UCI Machine Learning Repository. It contains 4,424 student records, 36 input features, and one target variable.
 
@@ -33,34 +32,22 @@ The target records students’ status at the end of the normal duration of their
 
 Enrolled students were still studying at that observation point; their eventual graduation or dropout outcomes are not provided.
 
-An initial file check found no blank or common missing-value markers and no fully duplicated rows. Further exploration will examine coded categories, unusual values, and feature distributions.
+An initial file check found no blank or common missing-value markers and no fully duplicated rows. The exploratory analysis below examines coded categories, unusual values, and feature distributions.
 
-## 4. Problem Framing and Prediction Timing
+## Problem Framing and Prediction Timing
 
 This is a supervised multiclass classification task because each historical student record has a known target label. The study uses offline batch training and evaluation.
 
-Two prediction scenarios are proposed:
+We compare two prediction stages, with financial variants treated as conditional analyses:
 
 - **Enrollment scenario:** Use only features confirmed to be available at enrollment.
 - **First-semester scenario:** Add academic results available at the end of the first semester.
 
-Second-semester academic features will be excluded from both scenarios. The availability of financial and other administrative variables will be checked before assigning them to either feature set. Variables with uncertain recording times will be excluded from timing-specific claims or explicitly treated as assumptions.
+Second-semester academic features are excluded from all modeled scenarios. Financial recording times remain unverified. The admission feature group is an operational assumption about availability, rather than a fully verified timestamp dictionary.
 
-Comparing these scenarios will show the trade-off between earlier prediction and the additional information gained after one semester.
+Comparing these scenarios illustrates the trade-off between earlier prediction and the additional information gained after one semester.
 
-## 5. Evaluation Metrics and Baselines
-
-Macro F1 is proposed as the primary model comparison metric. It gives equal weight to the three classes, helping assess performance when class sizes differ.
-
-Dropout recall will be a key application metric because it measures the proportion of actual dropout cases correctly identified. Dropout precision will also be reported to assess how many flagged students actually belong to the dropout class. These metrics capture the trade-off between missing students who may need support and generating unnecessary alerts.
-
-Accuracy, class-level scores, and a confusion matrix will provide additional context. No operational alert threshold is assumed at this stage because advising capacity and the costs of different errors have not been specified.
-
-A majority-class dummy classifier will provide a minimum performance benchmark, while logistic regression will serve as an interpretable model baseline. Models will be compared using the same stratified cross-validation folds on the training data, reporting mean scores and standard deviations. A separate held-out test set will be reserved for final evaluation.
-
-A simple rule-based flag, such as low first-semester performance, could provide a practical comparison if time permits. The project does not assume that this is an existing policy at the institution.
-
-## 6. Proposed Early Warning Application
+## Proposed Early Warning Application
 
 In a potential application, the model would estimate students’ academic status probabilities at a defined point in their studies. Student support staff could review students with elevated predicted dropout risk, discuss their circumstances, and offer appropriate assistance.
 
@@ -68,31 +55,25 @@ Predictions would support human review and voluntary assistance. They would not 
 
 The present project covers historical model development and evaluation. Live deployment and measurement of intervention outcomes are outside its scope.
 
-## 7. Scope and Assumptions
+## Scope and Assumptions
 
 The study assumes that historical patterns may provide useful information for similar future students. However, performance on this dataset does not establish that the model will work equally well at other universities or in different educational settings.
 
-The project will assess whether the model improves on baseline predictions, whether first-semester results add useful information, and how academic and financial feature groups contribute to prediction. Claims about reducing dropout or improving student outcomes would require a separate intervention study.
+The analyses compare models with a majority baseline, measure the contribution of first-semester results, and examine incremental academic and financial information. Claims about reducing dropout or improving student outcomes would require a separate intervention study.
 
-## Data Source
+## Exploratory Data Analysis
 
-Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5MC89
-
-
-
-## Exploratory Data Analysis (Part B)
-
-### 1. Purpose and research alignment
+### Purpose and research alignment
 This EDA examines outcome imbalance, academic patterns, financial indicators and data quality. It supports the team's questions about early prediction and the incremental predictive value of academic and financial information. It does not train a classifier or rank feature groups by predictive performance.
 
-### 2. Source, scope and reproducibility
+### Source, scope and reproducibility
 The UCI dataset contains 4,424 student records, 36 input variables and Target. The three labels describe status at the end of the normal course duration. Enrolled is an unresolved eventual outcome, not a guarantee of future graduation.
 
-A stratified 80%/20% split with random_state=42 assigns **3,539 records to training and 885 to held-out testing**. All outcome-related figures and summaries below use training records only. No held-out performance is calculated. The input file structure and full-row duplicates are checked globally; these checks do not select predictors. `tables/split_assignments.csv` stores the shared row assignment and `run_metadata.json` records the source hash. The team must adopt this split, or regenerate this EDA with the team's agreed split before modeling.
+A stratified 80%/20% split with random_state=42 assigns **3,539 records to training and 885 to held-out testing**. All outcome-related figures and summaries below use training records only. No held-out performance is calculated. The input file structure and full-row duplicates are checked globally; these checks do not select predictors. `tables/split_assignments.csv` stores the shared row assignment and `run_metadata.json` records the source hash. The preprocessing, model comparison, and tuning notebooks recreate this split using the same seed and stratification; reproduction also requires the original row order.
 
 Six second-semester fields are excluded from substantive exploration. The first-semester scenario includes earlier information plus six first-semester measurements. Availability dates of financial and administrative information remain unverified: results involving these fields are descriptive, conditional on later confirming availability.
 
-### 3. Outcome distribution
+### Outcome distribution
 | Status | n | Percent |
 |---|---|---|
 | Dropout | 1137 | 32.13 |
@@ -101,16 +82,16 @@ Six second-semester fields are excluded from substantive exploration. The first-
 
 ![Training target distribution](insy674_partb_result/figures/01_target_distribution.png)
 
-**Takeaway:** class frequencies differ. An always-Graduate classifier would have training accuracy of 49.9%, without identifying any Dropout cases. This is a descriptive baseline, not a held-out model result. D should prioritize macro F1 and class-specific dropout recall/precision over accuracy alone.
+**Takeaway:** class frequencies differ. An always-Graduate classifier would have training accuracy of 49.9%, without identifying any Dropout cases. This is a descriptive baseline, not a held-out model result. Model comparison prioritizes macro F1 and class-specific dropout recall/precision over accuracy alone.
 
-### 4. Data quality and complete attribute profiling
+### Data quality and complete attribute profiling
 No literal missing cells were found in the eligible training fields. The full CSV contains 0 completely duplicated rows. These checks do not prove every value is valid or semantically complete. Parent qualification code 34 denotes Unknown in UCI documentation; preserve that distinction from a blank value. Other codes must be checked against the complete dictionary rather than assumed ordinal.
 
 `tables/attribute_profile.csv` covers all 36 features: semantic type, feature group, time scope, missingness, cardinality, numeric range/skew or frequency-table reference, and preparation notes. Second-semester features are documented as excluded rather than having their values explored. Detailed category frequencies and numeric summaries accompany the profile.
 
 The source header contains trailing whitespace in Daytime/evening attendance; the script strips header whitespace. Numeric codes for course, nationality, occupations and qualifications represent categories. Avoid Pearson correlations or continuous scaling of these codes as if the numeric distances were meaningful. Valid extreme ages or academic counts should not be dropped solely because they are boxplot outliers.
 
-### 5. Academic factors
+### Academic factors
 ![Academic distributions](insy674_partb_result/figures/02_academic_by_outcome.png)
 
 Training-group medians:
@@ -120,13 +101,13 @@ Training-group medians:
 | Enrolled | 123.9 | 12.0 | 5.0 |
 | Graduate | 127.3 | 13.0 | 6.0 |
 
-**Takeaway:** compare the group medians and overlapping distributions rather than treating a single low grade as a deterministic rule. First-semester grade and passed-unit counts show the academic separation visible in the figure; admission grade provides an earlier comparison. These are associations, with predictive value to be measured in CV by D/E.
+**Takeaway:** compare the group medians and overlapping distributions rather than treating a single low grade as a deterministic rule. First-semester grade and passed-unit counts show the academic separation visible in the figure; admission grade provides an earlier comparison. These are associations, with predictive value to be measured in CV through model comparison and tuning.
 
 ![Age and approval rate](insy674_partb_result/figures/04_age_and_approval_rate.png)
 
-**Takeaway:** approved/enrolled units is a candidate academic progress feature. 148 training records have zero enrolled units and therefore an undefined ratio; keep them explicit and let C handle them inside the model pipeline. Zero semester grades should not automatically become missing values, because they may reflect no successful assessments. Age distributions overlap across outcomes, so age alone is not an individual risk decision rule.
+**Takeaway:** approved/enrolled units is a candidate academic progress feature. 148 training records have zero enrolled units and therefore an undefined ratio; keep them explicit and handle them inside the model pipeline. Zero semester grades should not automatically become missing values, because they may reflect no successful assessments. Age distributions overlap across outcomes, so age alone is not an individual risk decision rule.
 
-### 6. Financial indicators
+### Financial indicators
 ![Financial outcome proportions](insy674_partb_result/figures/03_financial_outcome_rates.png)
 
 - **Scholarship holder:** dropout share is 38.6% for No (n=2,645) and 12.9% for Yes (n=894).
@@ -135,7 +116,7 @@ Training-group medians:
 
 **Takeaway:** these are within-group outcome percentages, with sample counts shown to avoid confusing larger groups with higher risk. `financial_dropout_rates.csv` includes descriptive 95% Wilson intervals for dropout shares. Small groups are less precise. Financial status may be related to academic performance, background and recording time. These comparisons do not establish causality, independently adjusted effects or which support intervention would work.
 
-### 7. Distributions, context and correlations
+### Distributions, context and correlations
 ![Numeric distributions](insy674_partb_result/figures/05_numeric_distributions.png)
 
 **Takeaway:** inspect the actual shapes, zero concentrations and tails before choosing transformations. Robust scaling or standardization may help linear/distance-based models, but fit transformations inside training folds. Do not assume normality or remove tail observations automatically.
@@ -153,23 +134,16 @@ The strongest absolute numeric-feature correlations are:
 
 **Takeaway:** related academic measurements can carry overlapping information; individual feature importance may be shared across correlated predictors. Spearman correlation is descriptive and does not establish causality. Nominal category codes and Target are excluded from this numeric matrix. Course-level sample sizes and dropout shares are exported in `course_dropout_rates.csv`; rare courses require caution and numeric course codes have no ordered meaning.
 
-### 8. Recommendations for C, D and E
-- C: retain raw data; encode nominal categories; document unknown codes; construct approval rate with an explicit zero-denominator policy. Fit imputation, scaling and encoding within CV folds. Feature selection must not use the held-out test set.
-- A/C: finalize a timing dictionary. Exclude second-semester features and qualify enrollment-only claims for variables with uncertain recording dates.
-- D: use the shared split and identical stratified CV folds; include a majority dummy classifier and interpretable logistic regression. Report macro F1 mean/std and dropout precision/recall.
-- E: compare Context, Context + Academic, Context + Financial, and Context + Academic + Financial using the same model and CV conditions. Academic-only vs financial-only importance plots cannot establish incremental value by themselves. Define Course and family background consistently as context; GDP/inflation/unemployment are macroeconomic context, not direct student finances.
-- F: reserve test evaluation until model choices are fixed; discuss uncertain administrative timing, observational associations, unresolved Enrolled outcomes and transportability to other institutions.
+### Implications for modeling
 
-### 9. Assumptions, limitations and useful additional data
+The modeling workflow retains raw observations, encodes nominal categories, preserves unknown codes, and handles zero-denominator ratios inside preprocessing pipelines. Imputation, scaling, encoding, and any feature selection must be fitted without using held-out test data. Models use identical stratified CV conditions, with a majority dummy classifier and Logistic Regression as benchmarks.
+
+Incremental comparisons hold the estimator fixed across admission context, added first-semester observations, added financial indicators, and their combination. Course and family background are context; GDP, inflation, and unemployment are macroeconomic context rather than direct student finances. The implemented models exclude these three macroeconomic fields. Administrative timing remains an assumption requiring verification.
+
+### Assumptions, limitations and useful additional data
 This is descriptive analysis of a historical institutional dataset. The random split estimates an internal comparison; it does not demonstrate future-cohort or cross-university generalization. Date-stamped administrative records, cohort identifiers and dropout dates would help validate temporal availability and prevent including students whose dropout preceded an intended semester-end prediction. Household income, aid amounts, attendance, support-service usage and intervention outcomes would improve understanding but are not in this CSV. Do not infer that changing a correlated feature will change outcomes.
 
-### 10. Conclusion
-Academic and financial indicators provide testable hypotheses for the modeling team. The EDA establishes data structure, imbalance, descriptive group differences and preparation needs. Whether one group predicts better, or adds value to the other, remains a cross-validated modeling question.
-
-### Reference
-Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5MC89. Dataset licensed CC BY 4.0. Variable meanings and label horizon: https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success.
-
-## Data Preprocessing and Feature Engineering （Part C）
+## Data Preprocessing and Feature Engineering
 
 ### Data Cleaning
 
@@ -189,6 +163,8 @@ Four feature sets were created to support different prediction scenarios:
 All six second-semester features were excluded because they would not be available at the intended early prediction points.
 
 The financial scenarios include scholarship status, debtor status, and tuition payment status. Their recording times have not been independently verified, so these scenarios are treated as conditional analyses rather than confirmed leakage-free early prediction settings.
+
+Feature counts above refer to original input columns, before adding three engineered variables to first-semester scenarios and before one-hot encoding. The final encoded dimension depends on categories observed in each training fold.
 
 ### Feature Engineering
 
@@ -216,9 +192,9 @@ The preprocessing pipelines were tested using training data only. A Logistic Reg
 
 The pipelines are designed to be integrated with downstream classification models so that preprocessing parameters can be fitted separately within each cross-validation training fold, reducing the risk of data leakage.
 
-# Model Training and Performance Comparison
+## Model Training and Performance Comparison
 
-### 1. Model Selection
+### Candidate models
 
 We trained and compared five machine learning models to predict three possible student outcomes: Dropout, Enrolled, and Graduate.
 
@@ -230,11 +206,11 @@ We trained and compared five machine learning models to predict three possible s
 
 Using models from different algorithm families allows us to compare their predictive performance, generalization ability, and effectiveness in identifying students at risk of dropping out.
 
-### 2. Cross-Validation and Evaluation Metrics
+### Validation protocol and metrics
 
 The dataset was divided into 80% training data (3,539 observations) and 20% testing data (885 observations), using stratified sampling to preserve the target class distribution.
 
-We applied **Stratified 5-Fold Cross-Validation** to the training set. In each iteration, the model was trained on four folds and validated on the remaining fold. All preprocessing steps were included within the pipeline to prevent data leakage.
+We applied **Stratified 5-Fold Cross-Validation** to the training set. In each iteration, the model was trained on four folds and validated on the remaining fold. All learned preprocessing steps were included within the pipeline so that they were fitted within each training fold. This protects against preprocessing leakage, but does not verify the real-world availability dates of input variables.
 
 We evaluated each model using:
 
@@ -246,11 +222,13 @@ We evaluated each model using:
 
 Macro F1 was selected as the primary metric because the dataset contains imbalanced classes. Dropout Recall was also emphasized because the project's early warning objective requires identifying students who may need additional academic support.
 
-We reported the mean and standard deviation across the five folds to evaluate both predictive performance and stability.
+The notebooks report means and standard deviations across folds. All CV uses StratifiedKFold(n_splits=5, shuffle=True, random_state=42). Fold standard deviations describe variation across folds, not confidence intervals.
 
-### 3. Model Performance Comparison
+### Model Performance Comparison
 
-The following results are based on the First Semester feature set, which includes admission information and first-semester academic performance.
+Source: saved outputs in [the initial comparison notebook](insy674_partb_result/Part_D.ipynb).
+
+The following values are mean validation scores across five training-data folds for the untuned First Semester models. They are neither in-sample training scores nor scores on the 885-record test set.
 
 | Model | Accuracy | Macro F1 | Dropout Recall |
 |---|---:|---:|---:|
@@ -267,7 +245,7 @@ All five models outperformed the majority-class baseline in Macro F1.
 
 Although XGBoost ranked first in Macro F1, the difference between XGBoost and Gradient Boosting was relatively small. Therefore, their performance should be compared further during hyperparameter tuning.
 
-### 4. Feature Set Comparison
+### Feature Set Comparison
 
 We also evaluated four feature sets to investigate how prediction performance changes as additional information becomes available.
 
@@ -280,7 +258,7 @@ We also evaluated four feature sets to investigate how prediction performance ch
 
 Two important findings emerged.
 
-**First, first-semester academic performance substantially improved prediction accuracy.** The best Macro F1 increased from 0.4924 using admission-only features to 0.6320 after including first-semester information.
+**First, first-semester academic performance substantially improved the best observed macro F1.** The best Macro F1 increased from 0.4924 using admission-only features to 0.6320 after including first-semester information. Because the winning estimator changes between these rows, this comparison is descriptive; the fixed-estimator analysis below isolates the incremental feature contribution more consistently.
 
 This suggests that students' actual university performance provides valuable information beyond their admission characteristics.
 
@@ -290,7 +268,7 @@ However, financial indicators were treated as exploratory features because their
 
 Second-semester features were excluded to maintain the early prediction objective and avoid using future academic information.
 
-### 5. Overfitting and Error Analysis
+### Overfitting and Error Analysis
 
 We compared training and cross-validation performance to evaluate potential overfitting.
 
@@ -298,21 +276,9 @@ For the First Semester feature set, XGBoost achieved a training Macro F1 of 0.99
 
 In comparison, Logistic Regression showed a smaller generalization gap, indicating more stable performance on unseen validation folds.
 
-We also examined out-of-fold predictions from the shortlisted models.
+Out-of-fold errors for the untuned XGBoost comparison model are examined in Evaluation and Interpretation below.
 
-For XGBoost:
-
-- Dropout Recall: 69.39%
-- Enrolled Recall: 31.34%
-- Graduate Recall: 87.27%
-
-The model performed best at identifying graduates but struggled to distinguish enrolled students from the other two groups.
-
-The error analysis identified 216 actual dropout students incorrectly classified as graduates and 260 enrolled students incorrectly classified as graduates.
-
-These errors are particularly important for an early warning system because failing to identify potential dropouts may prevent institutions from providing timely support.
-
-### 6. Model Shortlisting
+### Model Shortlisting
 
 Based on Macro F1 performance using the First Semester feature set, we selected three models for further optimization:
 
@@ -326,13 +292,15 @@ Although Random Forest achieved the highest Dropout Recall, it was not included 
 
 The First Semester + Financial scenario also produced promising results and should be reconsidered once the timing of financial information is verified.
 
-## Part E — Hyperparameter Tuning and Feature Importance
+## Hyperparameter Tuning and Feature Importance
 
 ### Objective and reproducibility
-We build on Person D's stratified 80/20 split (seed 42), 5-fold stratified CV, and four predeclared feature sets. Only training rows are used in this part. We compare models by macro F1, with dropout recall as an operational secondary metric. The final test set is reserved for Person F.
+
+Sources: [tuning report](insy674_partb_result/part_e_results/PART_E_REPORT.md) and the exported CSV files linked in the repository guide.
+Tuning uses the same stratified 80/20 split (seed 42), five-fold stratified CV, and four feature sets as the initial model comparison. Only training rows are used, and the 885 test records remain reserved for independent evaluation.
 
 ### Hyperparameter tuning (First Semester, no financial indicators)
-We applied RandomizedSearchCV with five stratified folds to the three models shortlisted by D: XGBoost, Gradient Boosting, and Logistic Regression. Search spaces addressed model complexity, learning rate, regularization, and (for logistic regression) class weighting. This is a randomized search of a bounded hyperparameter space, not an exhaustive optimization or a causal experiment.
+We applied RandomizedSearchCV with five stratified folds to the three models shortlisted in the initial comparison: XGBoost, Gradient Boosting, and Logistic Regression. Search spaces addressed model complexity, learning rate, regularization, and (for logistic regression) class weighting. This is a randomized search of a bounded hyperparameter space, not an exhaustive optimization or a causal experiment.
 
 | Model               |   CV Macro F1 Mean |   CV Macro F1 Std |   Train - CV Gap |
 |:--------------------|-------------------:|------------------:|-----------------:|
@@ -352,7 +320,7 @@ A three-model soft-voting ensemble was compared with each tuned model using the 
 | Gradient Boosting    |          0.6344 |         0.0135 |                0.7053 |               0.0182 |          0.7259 |
 | XGBoost              |          0.6342 |         0.0184 |                0.708  |               0.0187 |          0.7268 |
 
-**Provisional training-CV choice:** Soft Voting Ensemble. These cross-validation results help with selection but may be optimistic because the same training data informs tuning and selection. Person F must evaluate the locked model once on the untouched held-out test set. No final-test performance claim is made here.
+**Provisional training-CV choice:** Soft Voting Ensemble. These cross-validation results help with selection but may be optimistic because the same training data informs tuning and selection. The locked model still requires evaluation once on the reserved held-out test set. No final-test performance claim is made here.
 
 ### Incremental academic and financial information
 To hold modeling conditions constant, we compared all four feature sets using the same untuned Logistic Regression estimator and the same five stratified folds:
@@ -377,7 +345,7 @@ For interpretability we computed permutation importance on training-held-out CV 
 
 ![First-semester permutation importance](insy674_partb_result/part_e_results/03_primary_feature_importance.png)
 
-A separate conditional model using First Semester + Financial was interpreted to examine the three finance-related columns:
+A separate untuned Logistic Regression model using First Semester + Financial was interpreted to examine the three finance-related columns:
 
 | Feature                 |   Mean |    Std |
 |:------------------------|-------:|-------:|
@@ -389,16 +357,9 @@ A separate conditional model using First Semester + Financial was interpreted to
 
 Permutation importance is model-specific and may distribute importance across correlated inputs; it does not imply causality or justify an individual-level intervention by itself.
 
-### Limitations and next step for Person F
-- Hyperparameter selection and model comparison reuse the training folds; reported CV results are exploratory model-selection metrics and potentially optimistic.
-- The Enrolled label does not settle students' eventual outcomes. Its class-specific performance should be explicitly reported by F.
-- Financial administrative timestamps are unverified. The **main** selected first-semester modeling scenario intentionally excludes the financial variables.
-- No held-out test scores were calculated in E. F should take the frozen selection from `model_selection_for_F.json`, reproduce the training pipeline, evaluate once, and discuss confusion matrices, recall/F1, and realistic limitations.
-- Before finalizing, A/E should verify all rubric items and ensure the repository contains final documentation and evidence figures.
+## Evaluation and Interpretation
 
-# Evaluation and Interpretation
-
-## Evaluation Objective
+### Evaluation scope
 
 This proof-of-value study examines whether machine learning can help academic advisors identify students who may need additional support. The evaluation considers classification performance across **Dropout**, **Enrolled**, and **Graduate** outcomes and the practical consequences of incorrect predictions.
 
@@ -406,18 +367,11 @@ This proof-of-value study examines whether machine learning can help academic ad
 
 The results presented here come from five-fold stratified cross-validation and out-of-fold predictions on the training data. They provide evidence of predictive potential and support model selection.
 
-## Model Performance and Selection
+### Model selection and practical trade-offs
 
 A soft-voting ensemble combining tuned Logistic Regression, Gradient Boosting, and XGBoost classifiers was selected based on its mean cross-validation macro F1.
 
 The selected scenario uses admission characteristics and first-semester academic information. Second-semester variables are excluded, and financial indicators are excluded from the main scenario because their recording dates have not been verified.
-
-| Candidate | CV Macro F1 (Mean ± SD) | CV Dropout Recall (Mean ± SD) | CV Accuracy (Mean) |
-|---|---:|---:|---:|
-| **Soft-voting ensemble** | **0.6516 ± 0.0113** | **0.6939 ± 0.0248** | **0.7304** |
-| Logistic Regression | 0.6476 ± 0.0158 | 0.6429 ± 0.0221 | 0.6948 |
-| Gradient Boosting | 0.6344 ± 0.0135 | 0.7053 ± 0.0182 | 0.7259 |
-| XGBoost | 0.6342 ± 0.0184 | 0.7080 ± 0.0187 | 0.7268 |
 
 The ensemble achieved the highest mean macro F1 and accuracy among the tuned candidates. Its mean dropout recall of **69.39%** indicates that it identified approximately 69 out of every 100 actual dropout cases across validation folds. Approximately 31% were missed on average.
 
@@ -425,7 +379,7 @@ However, its macro F1 exceeded tuned Logistic Regression by only **0.0040**. Thi
 
 XGBoost achieved the highest dropout recall, at **70.80%**, but a lower macro F1. The ensemble's selection reflects the project's emphasis on balanced performance across all three classes. A different choice could be appropriate if detecting dropout cases were given greater priority, depending on dropout precision and advising capacity.
 
-## Confusion Matrix and Error Analysis
+### Confusion matrix and error analysis
 
 Out-of-fold predictions from the **untuned first-semester XGBoost model** provide preliminary evidence about classification errors. Each prediction was generated while the corresponding student was excluded from that fold's training data.
 
@@ -445,37 +399,37 @@ The following matrix describes this comparison model across **3,539 training rec
 | Enrolled | 0.4442 | 0.3134 | 0.3675 |
 | Graduate | 0.7641 | 0.8727 | 0.8148 |
 
-### What Worked
+#### What Worked
 
 Graduate was the strongest class, with recall of **87.27%** and F1 of **0.8148**. The model also correctly identified **789 of 1,137 dropout cases**, showing that first-semester information contains useful signals for identifying academic risk.
 
-### What Remained Difficult
+#### What Remained Difficult
 
-Enrolled was the weakest class, with recall of **31.34%** and F1 of **0.3675**. The most frequent individual error was predicting Graduate for an Enrolled student, occurring in **260 cases**.
+Enrolled was the weakest class, with recall of **31.34%** and F1 of **0.3675**. The most frequent error type was predicting Graduate for an Enrolled student, occurring in **260 cases**.
 
 Enrolled represents students who were still studying at the observation point. Their eventual graduation or dropout outcomes are unknown. This complicates interpretation because the model predicts the recorded status rather than an eventual outcome. The available results do not establish the specific causes of these errors.
 
-### Missed Dropout Cases
+#### Missed Dropout Cases
 
 The model missed **348 actual dropout cases**: 216 were predicted as Graduate and 132 as Enrolled. If outreach depended heavily on model predictions, these students could receive lower priority despite subsequently dropping out.
 
 A prediction of Graduate should therefore not prevent a student from receiving assistance or override other evidence available to advisors.
 
-### False Dropout Alerts
+#### False Dropout Alerts
 
 The model incorrectly classified **284 students as Dropout**, including 176 Enrolled students and 108 Graduates. Approximately **26.47%** of its dropout alerts did not match the observed Dropout label.
 
 False alerts could increase advising workload and create unnecessary concern. However, an incorrect dropout prediction does not establish that support would be unhelpful. The practical value of outreach must be assessed through student and advisor outcomes as well as classification metrics.
 
-### Additional Information for Understanding Errors
+#### Additional Information for Understanding Errors
 
 Attendance, recent engagement changes, employment demands, caregiving responsibilities, and students' own explanations could provide context that academic and administrative records do not capture.
 
 These are proposed avenues for investigation rather than verified causes of the observed errors. Their usefulness would require further validation.
 
-## Interpretation of the Main Findings
+### Interpretation of the main findings
 
-### First-Semester Information Improves Prediction
+#### First-Semester Information Improves Prediction
 
 Under a fixed Logistic Regression comparison, adding first-semester academic information increased macro F1 from **0.4924 to 0.6206** and dropout recall from **52.94% to 69.66%**.
 
@@ -483,19 +437,19 @@ The improvements of **0.1282 in macro F1** and **16.72 percentage points in drop
 
 This supports reassessing students after the first semester. However, the additional information becomes available later, and some students may need assistance before first-semester results are recorded.
 
-### More Complex Models Did Not Always Perform Better
+#### More Complex Models Did Not Always Perform Better
 
 Tuned Logistic Regression achieved a higher macro F1 than either tuned boosting model and performed close to the ensemble. Its macro F1 increased from **0.6206 before tuning to 0.6476 afterward**.
 
 This finding shows that careful tuning of a simpler model can be competitive with more complex methods. The ensemble's modest advantage should be considered alongside its additional complexity.
 
-### Financial Information Shows Predictive Potential
+#### Financial Information Shows Predictive Potential
 
 Adding financial indicators increased macro F1 from **0.6206 to 0.6669** in the fixed first-semester Logistic Regression comparison.
 
 However, the recording dates of scholarship status, debtor status, and tuition payment status remain unverified. These results demonstrate predictive associations but do not establish that the variables would be available at the intended prediction date. They are therefore excluded from the main selected scenario.
 
-### Important Predictors Describe Associations
+#### Important Predictors Describe Associations
 
 Permutation importance for tuned Logistic Regression identified first-semester academic measures, including approved curricular units and grades, among the leading predictors. This is consistent with the improvement observed when first-semester information was added.
 
@@ -516,6 +470,16 @@ These importance results describe Logistic Regression rather than directly expla
 
 No operational alert threshold has been established because advising capacity and the consequences of different errors have not been specified. Any future threshold should be chosen using validation data and evaluated independently.
 
+## Outstanding Validation and Reproducibility Items
+
+The README covers the research framing, EDA, preprocessing, model comparison, tuning, interpretation, and limitations, but the empirical evaluation is not yet complete:
+
+- **Independent test evaluation:** the repository contains no final held-out scores, selected-ensemble confusion matrix, class-level precision/recall/F1, or selected-ensemble dropout precision. The XGBoost matrix below the selection discussion is preliminary training out-of-fold evidence only. The reserved test set should be used after the model and pipeline are fixed.
+- **Small result discrepancy:** the initial model-comparison notebook records Admission + Financial Logistic Regression macro F1 **0.5461**, whereas the later fixed-model CSV records **0.5464** (dropout recall **0.5971** versus **0.5980**). Both runs are retained with their provenance. The visible code uses the same split, feature definitions, estimator settings, and folds; the repository does not establish the cause of the difference. Reproduce both runs in a recorded environment before treating them as identical.
+- **Timing and outcome horizon:** verify administrative recording dates, admission-stage availability, and whether any dropout occurred before the intended first-semester prediction date. Financial scenarios remain conditional, and Enrolled students' eventual outcomes remain unknown.
+- **Reproducibility package:** the repository provides executed notebooks and exported tuning results, but no pinned dependency file or serialized selected model. Initial-comparison exports under `part_d_results/` are generated by the notebook but are not committed; their evidence currently resides in notebook outputs. A fully reproducible final run should record package versions, input hash, split verification, and the frozen model configuration.
+- **Application validation:** subgroup performance, calibration, advising capacity, alert thresholds, external or later-cohort validation, and intervention outcomes have not been established.
+
 ## Conclusion
 
 The study provides promising evidence that first-semester academic information can support student dropout prediction. The selected ensemble achieved a cross-validation macro F1 of **0.6516**, accuracy of **73.04%**, and dropout recall of **69.39%**.
@@ -523,3 +487,38 @@ The study provides promising evidence that first-semester academic information c
 Its advantage over tuned Logistic Regression was modest. Preliminary error analysis also revealed difficulty recognizing Enrolled students and a meaningful number of missed dropout cases. These findings support using predictions to prioritize advisor review and voluntary assistance.
 
 The project demonstrates predictive potential within a proof-of-value study. Further independent validation and an intervention study would be needed to establish whether model-guided outreach improves student outcomes.
+
+
+## Repository Guide and Reproduction
+
+Existing filenames are retained so that figures, notebooks, and result paths remain traceable.
+
+| Artifact | Location |
+|---|---|
+| Original dataset archive | [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) |
+| EDA script and detailed report | [Script](insy674_partb_result/PartB_EDA_Script.py), [report](insy674_partb_result/reports/partb_eda_report.md) |
+| EDA tables and split metadata | [tables/](insy674_partb_result/tables/), [split assignments](insy674_partb_result/tables/split_assignments.csv), [run metadata](insy674_partb_result/tables/run_metadata.json) |
+| Preprocessing notebook | [Part C.ipynb](insy674_partb_result/Part%20C.ipynb) |
+| Initial model comparison and OOF outputs | [Part_D.ipynb](insy674_partb_result/Part_D.ipynb) |
+| Tuning, ensemble, ablation, and importance notebook | [Part E.ipynb](insy674_partb_result/Part%20E.ipynb) |
+| Detailed tuning report | [PART_E_REPORT.md](insy674_partb_result/part_e_results/PART_E_REPORT.md) |
+| Tuned candidate metrics | [candidate_ensemble_cv.csv](insy674_partb_result/part_e_results/candidate_ensemble_cv.csv), [tuning_comparison.csv](insy674_partb_result/part_e_results/tuning_comparison.csv) |
+| Fixed-estimator feature comparison | [academic_financial_ablation.csv](insy674_partb_result/part_e_results/academic_financial_ablation.csv) |
+| Permutation importance | [Primary summary](insy674_partb_result/part_e_results/perm_primary_summary.csv), [conditional financial summary](insy674_partb_result/part_e_results/perm_financial_summary.csv) |
+| Selected configuration and tuned parameters | [model_selection_for_F.json](insy674_partb_result/part_e_results/model_selection_for_F.json) |
+
+Use Python with pandas, NumPy, SciPy, scikit-learn, XGBoost, Matplotlib, seaborn, Jupyter/IPython, and tabulate for report table export. Exact versions were not recorded in a dependency lockfile.
+
+1. Extract `data.csv` from the archive without changing row order. The preprocessing and initial-comparison notebooks read `data.csv` from their working directory, so place it beside those notebooks when running there.
+2. From the repository root, regenerate EDA with an explicit input and output path:
+   `python insy674_partb_result/PartB_EDA_Script.py --data insy674_partb_result/data.csv --output insy674_partb_result --seed 42 --test-size 0.2`.
+   Explicit arguments avoid the script's machine-specific input default.
+3. Run the preprocessing and initial-comparison notebooks from top to bottom. The latter includes its own preprocessing setup and writes `part_d_results/` relative to its working directory.
+4. Run the tuning notebook from its directory with `FAST_MODE=False`. It can locate the repository archive automatically and writes `part_e_results/` relative to the working directory. The saved run uses 10 randomized trials each for XGBoost and Gradient Boosting, 8 for Logistic Regression, and 4 permutation repeats per fold. The soft-voting ensemble averages the three tuned members' class probabilities with equal weights.
+5. Preserve the 885 test records for the fixed model's final evaluation. Regenerating CV is a separate operation from testing, and this README revision does not report a new model run.
+
+## Data Source
+
+Realinho, V., Vieira Martins, M., Machado, J., & Baptista, L. (2021). *Predict Students’ Dropout and Academic Success* [Dataset]. UCI Machine Learning Repository. [https://doi.org/10.24432/C5MC89](https://doi.org/10.24432/C5MC89).
+
+[Dataset documentation and variable definitions](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success). Dataset licensed CC BY 4.0.
