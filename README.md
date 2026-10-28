@@ -483,13 +483,12 @@ The study supports further investigation of a first-semester early warning syste
 
 ## Repository Guide and Reproduction
 
-The consolidated notebook is the single entry point for the project's exploratory analysis, preprocessing, model comparison, hyperparameter tuning, ensemble comparison, and feature importance.
+The consolidated notebook is the single entry point for the project's exploratory analysis, preprocessing, model comparison, hyperparameter tuning, ensemble comparison, feature importance, and final held-out evaluation.
 
 | File | Purpose |
 |---|---|
 | [README.md](README.md) | Project overview, methods, reported results, interpretation, and limitations. |
-| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Consolidated exploratory analysis and model-development code, arranged to run from top to bottom. |
-| [Final evaluation script](insy674_partb_result/part_f_results.py) | Rebuilds the selected model from the saved configuration and evaluates the held-out test set. |
+| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Complete analysis, model development, and final held-out evaluation, arranged to run from top to bottom. |
 | [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) | Original dataset archive containing the semicolon-separated `data.csv`. |
 
 ### Run the analysis
@@ -505,13 +504,7 @@ The consolidated notebook is the single entry point for the project's explorator
 4. Keep `FAST_MODE=False` for the full configured analysis. A quick run with `FAST_MODE=True` uses fewer search trials and permutation repeats and should not be treated as equivalent to the full run.
 5. Restart the kernel/runtime and run all cells in order. Tables and figures appear below their code cells as execution progresses. Model comparison, tuning, and permutation importance take longer than the initial data checks. Empty outputs in the downloaded notebook do not represent completed results.
 
-To reproduce the final held-out evaluation, download or clone the complete repository (including the saved model configuration), then run from the repository root:
-
-```bash
-python insy674_partb_result/part_f_results.py
-```
-
-The consolidated notebook covers model development; the evaluation script performs the final test. Archived results from the verified run are linked in Evaluation and Interpretation. Original training-environment versions were not recorded; the verified evaluation environment is recorded in its metadata.
+The notebook's final section evaluates the frozen selected ensemble on the 885 held-out records and reports test metrics, the confusion matrix, class-level performance, and error analysis. The selected configuration is embedded, so no separate configuration file or evaluation script is needed to run the notebook. The appended evaluation was executed and matched the verified standalone script's metrics and predictions exactly; the full integrated development workflow has not been rerun end to end. Archived verification results are linked in Evaluation and Interpretation.
 
 ## Data Source
 
