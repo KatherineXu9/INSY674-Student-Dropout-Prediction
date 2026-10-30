@@ -499,12 +499,14 @@ The consolidated notebook is the single entry point for the project's explorator
 | File | Purpose |
 |---|---|
 | [README.md](README.md) | Project overview, methods, reported results, interpretation, and limitations. |
-| [Student_Dropout.ipynb](Student_Dropout.ipynb) | Complete analysis, model development, and final held-out evaluation, arranged to run from top to bottom. |
+| [Student_Dropout (1).ipynb](<Student_Dropout (1).ipynb>) | Current notebook: complete analysis, model development, and final held-out evaluation, arranged to run from top to bottom. |
 | [predict+students+dropout+and+academic+success.zip](predict+students+dropout+and+academic+success.zip) | Original dataset archive containing the semicolon-separated `data.csv`. |
+
+The earlier notebook is archived at [insy674_partb_result/Student_Dropout.ipynb](insy674_partb_result/Student_Dropout.ipynb).
 
 ### Run the analysis
 
-1. Download `Student_Dropout.ipynb` and the dataset ZIP into the same folder. Open the notebook in Jupyter Notebook, JupyterLab, or Google Colab. In Colab, upload the dataset ZIP to the runtime's working folder. GitHub displays the notebook but does not execute it.
+1. Download `Student_Dropout (1).ipynb` and the dataset ZIP into the same folder. Open the notebook in Jupyter Notebook, JupyterLab, or Google Colab. In Colab, upload the dataset ZIP to the runtime's working folder. GitHub displays the notebook but does not execute it.
 2. Use a Python environment with pandas, NumPy, SciPy, scikit-learn, XGBoost, Matplotlib, seaborn 0.13 or later, IPython, and tabulate. If packages are missing, run the following in a notebook cell, then restart the kernel/runtime:
 
    ```python
