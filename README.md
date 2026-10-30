@@ -365,6 +365,13 @@ Permutation importance is model-specific and may distribute importance across co
 
 ## Evaluation Objective and Method
 
+The final evaluation uses the frozen model configuration saved in
+`model_selection_for_F.json`. This configuration was selected using
+training-data cross-validation before test evaluation. The reported test
+results reproduce this specific model; they do not automatically evaluate
+a different model selected by a later tuning run. No model settings or
+thresholds were adjusted based on the test results.
+
 This proof-of-value study evaluates whether machine learning can help academic advisors identify students who may need additional support. Macro F1 is the primary metric because it gives equal weight to Dropout, Enrolled, and Graduate outcomes. Dropout recall measures the proportion of actual dropout cases identified, while dropout precision measures the reliability of dropout alerts.
 
 The final evaluation used the repository's stratified 80/20 split with random state 42: 3,539 training students and 885 held-out test students. The test set contained 284 Dropout, 159 Enrolled, and 442 Graduate students.
@@ -376,6 +383,10 @@ The model uses 24 original admission and first-semester inputs, with first-semes
 ## Held-Out Test Results and Baseline Comparison
 
 All models were evaluated on the same 885 test students. The majority-class baseline always predicts Graduate. The Logistic Regression baseline is untuned, with the same first-semester preprocessing and inputs, `max_iter=2000`, and random state 42; it is distinct from the tuned Logistic Regression ensemble member.
+
+The results below correspond to the frozen model configuration and are
+documented in `evaluation_results/`. New development runs are separate
+experiments and do not automatically replace these reported results.
 
 | Model | Accuracy | Macro F1 | Dropout Precision | Dropout Recall | Dropout F1 |
 |---|---:|---:|---:|---:|---:|
